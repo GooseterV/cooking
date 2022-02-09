@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&family=Noto+Sans+JP&family=Red+Hat+Display:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100&family=Montserrat:wght@300;500&display=swap');
+
+* {
+	font-family: "Montserrat" !important;
+}
+
+button, #ingredient-list span {
+	border-radius: 10px;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none;
+	border: 0.67rem solid transparent;
+	text-decoration: none;
+	background-color:#50affdbe;
+	transition: .2s ease-in-out 0s;
+}
+
+.ingredient-button {
+	background-color:transparent !important;
+	font-size:13px;
+	margin-bottom:-10px;
+	height:15px;
+	
+}
+
+.rfl {
+	float:right;
+	left:75%;
+
+}
+
+.bigrow {
+	display:flex;
+	flex-direction:row;
+	top:0%;
+}
+
+#ingredient-list {
+	display:flex;
+	position:relative;
+	flex-direction:column;
+	background-color:rgba(181, 241, 241, 0.637);
+	border-radius:7px;
+	height:auto;
+}
+
+input, textarea {
+	color:black;
+	border-radius: 10px;
+	font-weight: bold;
+	font-size: 15px;
+	text-decoration: none;
+	border: 0.67rem solid transparent;
+	background-color:#50affdbe;
+	outline:none;
+	vertical-align: top;
+	
+}
+
+
+
+#food-input, #ingredient-input {
+	margin-right:10px;
+}
+
+::placeholder {
+	color:black;
+	opacity:1;
+}
+
+.row {
+	display:flex;
+	flex-direction:row;
+}
+
+button {
+	cursor:pointer !important;
+}
