@@ -89,6 +89,7 @@ const MEALS = [];
 let INGREDIENTS_ACTIVE = false;
 let ACTIVE_CATEGORIES = [];
 let ACTIVE_INGREDIENT = null;
+let PAN_ON = false;
 async function addFood(name, grams) {
 	const food = {
 		"name":name,
@@ -200,8 +201,8 @@ async function addIngredientToPan(ingredient) {
 		} else {
 			panElement.children[1].src = INGREDIENT_IMAGES[ingredient];
 		};
-		panDetails.innerText = `
-		0° (F)
+		panDetails.innerHTML = `
+		0° (F) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		Full Pan (${ingredient})
 		`;
 
@@ -215,13 +216,103 @@ async function addIngredientToPan(ingredient) {
 
 async function handlePanClick(contents) {
 	const panElement = document.getElementById("pan-holder");
+	const panDetails = document.getElementById("pan-details");
 	if (ACTIVE_INGREDIENT === null && contents !== "null") {
 		ACTIVE_INGREDIENT = contents;
 		panElement.setAttribute("data-contents", "null");
 		panElement.children[1].src = "src/transparent.png";
+		panDetails.innerHTML = `
+		0° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		Empty Pan
+		`;
 	} else if (contents === "null" && ACTIVE_INGREDIENT !== null) {
 		addIngredientToPan(ACTIVE_INGREDIENT);
 	} else if (contents !== "null" && ACTIVE_INGREDIENT !== null) {
-		alert("Pan is already full!")
-	}
+		alert("Pan is already full!");
+	};
+};
+
+async function increasePanTemperature() {
+	const panDetails = document.getElementById("pan-details");
+	const panElement = document.getElementById("pan-holder");
+	const panContents = panElement.getAttribute("data-contents");
+	let temp = parseInt(panElement.getAttribute("data-temperature"));
+	panElement.setAttribute("data-temperature", String(temp+1))
+	if (panContents !== "null") {
+		panDetails.innerHTML = `
+		${temp+1}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		Full Pan (${panContents})
+		`;
+	} else if (panContents === "null") {
+		panDetails.innerHTML = `
+		${temp+1}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		Empty Pan
+		`;
+	};
+};
+
+async function turnOnPan() {
+	const panDetails = document.getElementById("pan-details");
+	const panElement = document.getElementById("pan-holder");
+	const panContents = panElement.getAttribute("data-contents");
+	if (panContents !== "null") {
+		panDetails.innerHTML = `
+		0° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		Full Pan (${panContents})
+		`;
+	} else if (panContents === "null") {
+		panDetails.innerHTML = `
+		0° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		Empty Pan
+		`;
+	};
+	PAN_ON = true;
+	setInterval(increasePanTemperature, 975);
+
+};
+
+async function decreasePanTemperature() {
+	const panDetails = document.getElementById("pan-details");
+	const panElement = document.getElementById("pan-holder");
+	const panContents = panElement.getAttribute("data-contents");
+	let temp = parseInt(panElement.getAttribute("data-temperature"));
+	panElement.setAttribute("data-temperature", String(temp-1))
+	if (panContents !== "null") {
+		panDetails.innerHTML = `
+		${temp-1}° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		Full Pan (${panContents})
+		`;
+	} else if (panContents === "null") {
+		panDetails.innerHTML = `
+		${temp-1}° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		Empty Pan
+		`;
+	};
+};
+
+async function turnOffPan() {
+	const panDetails = document.getElementById("pan-details");
+	const panElement = document.getElementById("pan-holder");
+	const panContents = panElement.getAttribute("data-contents");
+	if (panContents !== "null") {
+		panDetails.innerHTML = `
+		0° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		Full Pan (${panContents})
+		`;
+	} else if (panContents === "null") {
+		panDetails.innerHTML = `
+		0° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		Empty Pan
+		`;
+	};
+	PAN_ON = false;
+	setInterval(decreasePanTemperature, 1250);
+};
+
+async function handlePanToggle() {
+	if (PAN_ON) {
+		turnOffPan();
+	} else if (!(PAN_ON)) {
+		turnOnPan();
+	};
 };
