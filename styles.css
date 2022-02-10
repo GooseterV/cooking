@@ -68,11 +68,24 @@ button, #ingredient-list span {
 
 #ingredient-list {
 	border-radius:7px;
+	position:relative;
+	border-radius:7px;
+	height:auto;
+	display:flex;
+	flex-direction:row;
+	border-bottom: 0.67rem solid transparent;
+}
+
+.ingredient-columm {
+	background-color:rgba(181, 241, 241, 0.637);
 	display:flex;
 	flex-direction:column;
 	border-bottom: 0.67rem solid transparent;
 	background-color:rgba(181, 241, 241, 0.637);
 	position:relative;
+	border-radius:7px;
+	height:auto;
+	border-bottom: 0.67rem solid transparent;
 }
 
 .category-contents {
