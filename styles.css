@@ -33,19 +33,21 @@ button, #ingredient-list span {
 
 }
 
-.bigrow {
-	display:flex;
-	flex-direction:row;
-	top:0%;
-}
+
 
 #ingredient-list {
-	display:flex;
-	position:relative;
-	flex-direction:column;
-	background-color:rgba(181, 241, 241, 0.637);
 	border-radius:7px;
-	height:auto;
+	display:flex;
+	flex-direction:row;
+	border-bottom: 0.67rem solid transparent;
+}
+
+.ingredient-columm {
+	background-color:rgba(181, 241, 241, 0.637);
+	display:flex;
+	flex-direction:column;
+	border-radius:7px;
+	border-bottom: 0.67rem solid transparent;
 }
 
 input, textarea {
@@ -77,6 +79,10 @@ input, textarea {
 	flex-direction:row;
 }
 
-button {
+button:hover,  #ingredient-list span:hover{
 	cursor:pointer !important;
+}
+
+#ingredient-storage:hover {
+	cursor:pointer;
 }
