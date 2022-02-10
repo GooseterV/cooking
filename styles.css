@@ -10,21 +10,52 @@ button, #ingredient-list span {
 	align-items: center;
 	justify-content: center;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 12px;
 	text-align: center;
 	text-decoration: none;
 	border: 0.67rem solid transparent;
 	text-decoration: none;
 	background-color:#50affdbe;
 	transition: .2s ease-in-out 0s;
+	font-weight:light;
 }
 
 .ingredient-button {
 	background-color:transparent !important;
-	font-size:13px;
+	font-size:12px;
 	margin-bottom:-10px;
 	height:15px;
-	
+
+}
+
+.category {
+	font-size:15px !important;
+	font-weight:bold !important;
+	color:black !important;
+}
+
+#pan-holder {
+	float:right;
+	left:85%;
+	position:absolute;
+	margin-top:5px;
+	margin-bottom:1px;
+	text-align:center;
+}
+
+#pan-details p {
+	text-align:center;
+}
+
+#pan-holder img {
+	transform:rotate(45deg);
+}
+
+
+#pan-contents {
+	position:relative;
+	top:-50px;
+	left:-43.5px;
 }
 
 .rfl {
@@ -38,17 +69,18 @@ button, #ingredient-list span {
 #ingredient-list {
 	border-radius:7px;
 	display:flex;
-	flex-direction:row;
+	flex-direction:column;
 	border-bottom: 0.67rem solid transparent;
+	background-color:rgba(181, 241, 241, 0.637);
+	position:relative;
 }
 
-.ingredient-columm {
-	background-color:rgba(181, 241, 241, 0.637);
+.category-contents {
 	display:flex;
 	flex-direction:column;
-	border-radius:7px;
-	border-bottom: 0.67rem solid transparent;
 }
+
+
 
 input, textarea {
 	color:black;
@@ -77,6 +109,10 @@ input, textarea {
 .row {
 	display:flex;
 	flex-direction:row;
+}
+
+#ingredient-list span {
+	color:rgba(31, 30, 30, 0.685);
 }
 
 button:hover,  #ingredient-list span:hover{

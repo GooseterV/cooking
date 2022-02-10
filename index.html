@@ -1,15 +1,28 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="styles.css">
+		<meta charset="utf-8"/>
 		<title>Cooking</title>
+		<link rel="icon" href="src/pan_with_egg.png">
 	</head>
 	<body>
 		<script src="bundle.js"></script>
 		<div class="row">
 			<img src="src/box.png" onclick="showIngredients()" id="ingredient-storage" width="114.67px" height="100px" />
 			<div id="ingredient-list" style="display:flex;">
-	
+				
+			</div>
+			<div id="pan-holder" onclick="handlePanClick(this.getAttribute('data-contents'))" data-contents="null">
+				<img src="src/empty_pan.png" id="cooking-pan" width="69px" height="100px" />
+				<img src="src/transparent.png" id="pan-contents" width="32.5px" height="32.5px" />
+				<br>
+				<span id="pan-details" style="position: relative; left:-10px;">
+					0° (F)
+					<br>
+					Empty Pan
+				</span>
 			</div>
 		</div>
+
 	</body>
 </html>
