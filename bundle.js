@@ -191,7 +191,9 @@ const INGREDIENT_IMAGES = {
 	"Lemon":"src/lemon.png",
 	"Yellow Bell Pepper":"src/yellow_bell_pepper.png",
 	"Turkey Patty":"src/turkey_patty.png",
-	"Beef Patty":"src/beef_patty.png"
+	"Beef Patty":"src/beef_patty.png",
+	"Top Burger Bun":"src/top_burger_bun.png",
+	"Bottom Burger Bun":"src/bottom_burger_bun.png",
 
 };
 const CATGEGORIES = Object.keys(INGREDIENTS);
