@@ -20,7 +20,7 @@ const INGREDIENTS = {
 		"Orange Bell Pepper",
 		"Yellow Bell Pepper",
 		"Jalapeño",
-		"Habañero",
+		"Habanero",
 		"Ginger Root",
 		"Green Bell Pepper",
 		"Radish",
@@ -56,7 +56,7 @@ const INGREDIENTS = {
 	"Meats":[
 		"Duck Breast",
 		"T-Bone Steak",
-		"Steak Patty",
+		"Beef Patty",
 		"Turkey Patty",
 		"Steak",
 		"Chicken Breast",
@@ -97,22 +97,75 @@ const INGREDIENTS = {
 		"Chives",
 		"Sage"
 	],
-	// other stuff such as eggs and cheese
-	"Other":[
-		"Egg",
+	// breads and pasta stuff
+	"Carbs":[
+		"White Bread",
+		"Sourdough",
+		"Rye Bread",
+		"Whole Wheat Bread",
+		"Ziti",
+		"Penne",
+		"Rigatoni",
+		"Top Burger Bun",
+		"Bottom Burger Bun",
+		"Hotdog Bun"
+	],
+	// dairies like milk and cheese
+	"Dairy":[
 		"Cheddar Cheese",
 		"Goat Cheese",
 		"Gouda",
 		"Swiss Cheese",
 		"Mozarrella",
-		"White Bread",
-		"Sourdough",
-		"Rye Bread",
-		"Whole Wheat Bread",
 		"Gorgonzola",
 		"Feta",
 		"Butter",
-		"Cream Cheese"
+		"Cream Cheese",
+		"Whole Milk",
+		"Low-Fat Milk",
+		"Skim Milk",
+		"Goat Milk"
+	],
+
+	"Liquids":[
+		"Almond Milk",
+		"Coconut Milk",
+		"Root Beer",
+		"Red Wine",
+		"Vodka",
+		"White Wine",
+		"Rice Wine",
+		"Gin",
+		"Rum",
+		"Vinegar",
+		"Sunflower Oil",
+		"Vegetable Oil",
+		"Olive Oil",
+
+	],
+	// seasonings, spices and powders
+	"Seasonings":[
+		"Flour",
+		"Granulated Sugar",
+		"Powdered Sugar",
+		"Brown Sugar",
+		"Almond Flour",
+		"Wheat Flour",
+		"Cinnamon Sugar",
+		"Black Pepper",
+		"Salt",
+		"Allspice",
+		"Cayenne Pepper Seasoning",
+		"Chili Powder",
+		"Red Pepper",
+		"Paprika"
+	],
+	// other stuff such as eggs 
+	"Other":[
+		"Egg",
+		"Apple Butter",
+		"Walnut Butter",
+		"Almond Butter"
 	],
 };
 
@@ -122,16 +175,83 @@ const INGREDIENT_IMAGES = {
 	"Steak":"src/steak.png",
 	//"Ginger Root":"src/ginger.png",
 	"Tomato":"src/tomato.png",
-	"Garlic":"src/garlic.png"
+	"Garlic":"src/garlic.png",
+	"Carrot":"src/carrot.png",
+	"Red Bell Pepper":"src/red_bell_pepper.png",
+	"Orange Bell Pepper":"src/orange_bell_pepper.png",
+	"Green Bell Pepper":"src/green_bell_pepper.png",
+	"Habanero":"src/habanero.png",
+	"Jalapeño":"src/jalapeno.png",
+	"Chili Pepper":"src/chili_pepper.png",
+	"Swiss Cheese":"src/swiss_cheese.png",
+	"Orange":"src/orange.png",
+	"Pear":"src/pear.png",
+	"Apple":"src/apple.png",
+	"Lime":"src/lime.png",
+	"Lemon":"src/lemon.png",
+	"Yellow Bell Pepper":"src/yellow_bell_pepper.png",
+	"Turkey Patty":"src/turkey_patty.png",
+	"Beef Patty":"src/beef_patty.png"
+
 };
 const CATGEGORIES = Object.keys(INGREDIENTS);
-const MEALS = [];
+const MEALS = [
+	{
+		"Name":"Burger and Fries",
+		"Ingredients":[
+			{
+				"Ingredient":"Potato",
+				"Method":"Fried",
+				"Pieces":"20",
+				"Amount":"300"
+			},
+			{
+				"Ingredient":"Beef Patty",
+				"Method":"Grilled",
+				"Pieces":"1",
+				"Amount":"235"
+			},
+			{
+				"Ingredient":"Tomato",
+				"Method":"Slightly Grilled",
+				"Pieces":"1",
+				"Amount":"100"
+			},
+			{
+				"Ingredient":"Cheddar Cheese",
+				"Method":"Raw",
+				"Pieces":"1",
+				"Amount":"50"
+			},
+			{
+				"Ingredient":"Top Burger Bun",
+				"Method":"Raw",
+				"Pieces":"1",
+				"Amount":"150"
+			},
+			{
+				"Ingredient":"Bottom Burger Bun",
+				"Method":"Raw",
+				"Pieces":"1",
+				"Amount":"150"
+			}
+		],
+		"Ingredient Names":[
+			"Tomato",
+			"Beef Patty",
+			"Top Burger Bun",
+			"Bottom Burger Bun",
+			"Cheddar Cheese"
+		]
+	},
+]
 let INGREDIENTS_ACTIVE = false;
 let ACTIVE_CATEGORIES = [];
 let ACTIVE_INGREDIENT = null;
 let PAN_ON = false;
 let PAN_ON_INTERVAL;
 let PAN_OFF_INTERVAL;
+let MEAL_INGREDIENTS = [];
 async function addFood(name, grams) {
 	const food = {
 		"name":name,
@@ -372,5 +492,58 @@ async function handlePanToggle() {
 		turnOffPan();
 	} else if (!(PAN_ON)) {
 		turnOnPan();
+	};
+};
+
+async function attemptMakeMeal(ingredients) {
+	let SELECTED_MEAL;
+	for (let meal of MEALS) {
+		if (meal["Ingredient Names"].all(i=> ingredients.includes(i))) {
+			SELECTED_MEAL = meal;
+		};
+	};
+	alert("Attempted to make meal: " + SELECTED_MEAL)
+};
+
+async function addIngredientToMealHolder(ingredient) {
+	const mealTable = document.getElementById("meal-maker");
+	const mealImageHolder = document.getElementById("meal-contents-image-holder");
+	if (Object.keys(INGREDIENT_IMAGES).includes(ingredient)) {
+		let ingredientImage = document.createElement("img");
+		ingredientImage.src = INGREDIENT_IMAGES[ingredient];
+		ingredientImage.width = 27.5;
+		ingredientImage.height = 27.5;
+		//ingredientImage.style = "image-rendering: pixelated;";
+		
+		mealImageHolder.appendChild(ingredientImage);
+
+	} else if (!(Object.keys(INGREDIENT_IMAGES).includes(ingredient))) {
+		alert(ingredient);
+		alert("Ingredient image not yet added.");
+	};
+};
+
+async function handleMealMakeClick() {
+	const mealButton = document.getElementById("meal-maker");
+	const mealIngredientsHolder = document.getElementById("meal-contents-image-holder");
+	let mealIngredients = mealButton.getAttribute("data-ingredients");
+	if (ACTIVE_INGREDIENT !== null || ACTIVE_INGREDIENT) {
+		MEAL_INGREDIENTS.push(ACTIVE_INGREDIENT);
+		if (MEAL_INGREDIENTS.length < 3) {
+			addIngredientToMealHolder(ACTIVE_INGREDIENT);
+		};
+		ACTIVE_INGREDIENT = null;
+		mealButton.setAttribute("data-ingredients", JSON.stringify(MEAL_INGREDIENTS));
+		//attemptMakeMeal(JSON.parse(mealIngredients));
+	} else if (ACTIVE_INGREDIENT === null && mealIngredients === "null") {
+		alert("Nothing is on the table and you have no ingredient selected!")
+	} else if (ACTIVE_INGREDIENT === null && (mealIngredients !== "null" || mealIngredients === "[]")) {
+		ACTIVE_INGREDIENT = MEAL_INGREDIENTS[MEAL_INGREDIENTS.length-1];
+		MEAL_INGREDIENTS.pop(MEAL_INGREDIENTS.length-1);
+		mealButton.setAttribute("data-ingredients", JSON.stringify(MEAL_INGREDIENTS));
+		if (mealIngredientsHolder.lastElementChild.tagName === "IMG") {
+			mealIngredientsHolder.lastElementChild.remove();
+		};
+		
 	};
 };

@@ -8,18 +8,18 @@
 	<body>
 		<script src="bundle.js"></script>
 		<div class="row">
-			<img src="src/box.png" onclick="showIngredients()" id="ingredient-storage" width="114.67px" height="100px" />
+			<img src="src/box.png" onclick="showIngredients()" id="ingredient-storage" width="114.67px" height="100px" style="image-rendering: pixelated;"/>
 			<div id="ingredient-list" style="display:flex;">
 				
 			</div>
 			<div id="pan-holder" data-contents="null" data-temperature="59" >
-				<div id="pan-images-holder" onclick="handlePanClick(this.parentElement.getAttribute('data-contents'))">
-					<img src="src/empty_pan.png" id="cooking-pan" width="69px" height="100px"/>
+				<div id="pan-images-holder" onclick="handlePanClick(this.parentElement.getAttribute('data-contents'))" style="cursor:pointer;">
+					<img src="src/empty_pan.png" id="cooking-pan" width="69px" height="100px" style="image-rendering: pixelated;"/>
 					<img src="src/transparent.png" id="pan-contents" width="32.5px" height="32.5px" />
 				</div>
 				<br>
 				<span id="pan-details" style="position: relative; left:-10px; z-index: index 200;">
-					59° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+					59° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200; cursor:pointer;" onclick="handlePanToggle()"/>
 					<br>
 					Empty Pan
 				</span>
@@ -27,6 +27,11 @@
 			</div>
 			
 		</div>
-
+		<div id="meal-maker" style="cursor:pointer;" onclick="handleMealMakeClick()" data-ingredients="null">
+			<img src="src/table.png" id="table-image" width="100px" height="89.65px" style="image-rendering: pixelated;"/>
+			<div id="meal-contents-image-holder">
+				
+			</div>
+		</div>
 	</body>
 </html>

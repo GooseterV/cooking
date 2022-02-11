@@ -134,3 +134,23 @@ button:hover,  #ingredient-list span:hover{
 #ingredient-storage:hover {
 	cursor:pointer;
 }
+
+#meal-maker {
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform:translate(-50%, -50%);
+}
+
+#meal-contents-image-holder {
+	display:flex;
+	flex-direction:row;
+	position:relative;
+	top:-69px;
+	left:10px;
+}
+
+/*
+img {
+	image-rendering: pixelated;
+}*/
