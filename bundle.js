@@ -21,7 +21,18 @@ const INGREDIENTS = {
 		"Yellow Bell Pepper",
 		"Jalapeño",
 		"Habañero",
-		"Ginger Root"
+		"Ginger Root",
+		"Green Bell Pepper",
+		"Radish",
+		"Asparagus",
+		"Brussel Sprout",
+		"Beetroot",
+		"Corn",
+		"Mushroom",
+		"Chili Pepper",
+		"Eggplant",
+		"Horseradish Root",
+		"Zucchini"
 	],
 	// fruits
 	"Fruits":[
@@ -34,7 +45,12 @@ const INGREDIENTS = {
 		"Tangerine",
 		"Apple",
 		"Banana",
-		"Kiwi"
+		"Kiwi",
+		"Lime",
+		"Lemon",
+		"Honey Mango",
+		"Blackberry",
+		"Raspberry"
 	],
 	// meats
 	"Meats":[
@@ -55,24 +71,48 @@ const INGREDIENTS = {
 	],
 	// seafood
 	"Seafood":[
-		"Scallions",
-		"Oysters",
+		"Scallion",
+		"Oyster",
 		"Cod",
 		"Salmon",
 		"Whitefish",
-		"Pufferfish"
+		"Pufferfish",
+		"Anchovy",
+		"Sardine",
+		"Trout",
+		"Scallop",
+		"Shrimp",
+		"Swordfish"
 	],
 	// herbs 
 	"Herbs":[
 		"Dill",
-		"Silantro",
+		"Cilantro",
 		"Rosemary",
 		"Thyme",
-		"Parsley"
+		"Parsley",
+		"Basil",
+		"Lavender",
+		"Bay Leaf",
+		"Chives",
+		"Sage"
 	],
-	// other stuff such as eggs
+	// other stuff such as eggs and cheese
 	"Other":[
-		"Egg"
+		"Egg",
+		"Cheddar Cheese",
+		"Goat Cheese",
+		"Gouda",
+		"Swiss Cheese",
+		"Mozarrella",
+		"White Bread",
+		"Sourdough",
+		"Rye Bread",
+		"Whole Wheat Bread",
+		"Gorgonzola",
+		"Feta",
+		"Butter",
+		"Cream Cheese"
 	],
 };
 
@@ -324,13 +364,7 @@ async function turnOffPan() {
 	};
 	PAN_ON = false;
 	clearInterval(PAN_ON_INTERVAL)
-	PAN_OFF_INTERVAL = setInterval(()=> {
-		if (PAN_ON) {
-			return
-		} else if (!(PAN_ON)) {
-
-		};
-	}, 1250);
+	PAN_OFF_INTERVAL = setInterval(()=>{}, 1250);
 };
 
 async function handlePanToggle() {
