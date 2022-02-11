@@ -12,12 +12,14 @@
 			<div id="ingredient-list" style="display:flex;">
 				
 			</div>
-			<div id="pan-holder" data-contents="null" data-temperature="0" onclick="handlePanClick(this.getAttribute('data-contents'))">
-				<img src="src/empty_pan.png" id="cooking-pan" width="69px" height="100px"/>
-				<img src="src/transparent.png" id="pan-contents" width="32.5px" height="32.5px" />
+			<div id="pan-holder" data-contents="null" data-temperature="59" >
+				<div id="pan-images-holder" onclick="handlePanClick(this.parentElement.getAttribute('data-contents'))">
+					<img src="src/empty_pan.png" id="cooking-pan" width="69px" height="100px"/>
+					<img src="src/transparent.png" id="pan-contents" width="32.5px" height="32.5px" />
+				</div>
 				<br>
 				<span id="pan-details" style="position: relative; left:-10px; z-index: index 200;">
-					0° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+					59° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 					<br>
 					Empty Pan
 				</span>

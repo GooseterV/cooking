@@ -90,6 +90,8 @@ let INGREDIENTS_ACTIVE = false;
 let ACTIVE_CATEGORIES = [];
 let ACTIVE_INGREDIENT = null;
 let PAN_ON = false;
+let PAN_ON_INTERVAL;
+let PAN_OFF_INTERVAL;
 async function addFood(name, grams) {
 	const food = {
 		"name":name,
@@ -194,18 +196,19 @@ async function handleIngredientClick(ingredient) {
 async function addIngredientToPan(ingredient) {
 	const panElement = document.getElementById("pan-holder");
 	const panDetails = document.getElementById("pan-details");
+	let temp = parseInt(panElement.getAttribute("data-temperature"));
 	ACTIVE_INGREDIENT = null;
 	if (Object.keys(INGREDIENT_IMAGES).includes(ingredient)) {
 		if (ingredient === "Egg") {
-			panElement.children[1].src = INGREDIENT_IMAGES["Fried Egg"];
+			document.getElementById("pan-contents").src = INGREDIENT_IMAGES["Fried Egg"];
 		} else {
-			panElement.children[1].src = INGREDIENT_IMAGES[ingredient];
+			document.getElementById("pan-contents").src = INGREDIENT_IMAGES[ingredient];
 		};
 		panDetails.innerHTML = `
-		0° (F) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		${temp}° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		<br>
 		Full Pan (${ingredient})
 		`;
-
 	} else {
 		alert("Food image not yet added.");
 	};
@@ -217,12 +220,15 @@ async function addIngredientToPan(ingredient) {
 async function handlePanClick(contents) {
 	const panElement = document.getElementById("pan-holder");
 	const panDetails = document.getElementById("pan-details");
+	let temp = parseInt(panElement.getAttribute("data-temperature"));
 	if (ACTIVE_INGREDIENT === null && contents !== "null") {
 		ACTIVE_INGREDIENT = contents;
 		panElement.setAttribute("data-contents", "null");
-		panElement.children[1].src = "src/transparent.png";
+		document.getElementById("pan-contents").src = "src/transparent.png";
+		turnOffPan();
 		panDetails.innerHTML = `
-		0° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		${temp}° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		<br>
 		Empty Pan
 		`;
 	} else if (contents === "null" && ACTIVE_INGREDIENT !== null) {
@@ -241,11 +247,13 @@ async function increasePanTemperature() {
 	if (panContents !== "null") {
 		panDetails.innerHTML = `
 		${temp+1}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		<br>
 		Full Pan (${panContents})
 		`;
 	} else if (panContents === "null") {
 		panDetails.innerHTML = `
 		${temp+1}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		<br>
 		Empty Pan
 		`;
 	};
@@ -255,19 +263,23 @@ async function turnOnPan() {
 	const panDetails = document.getElementById("pan-details");
 	const panElement = document.getElementById("pan-holder");
 	const panContents = panElement.getAttribute("data-contents");
+	let temp = parseInt(panElement.getAttribute("data-temperature"));
 	if (panContents !== "null") {
 		panDetails.innerHTML = `
-		0° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		${temp}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		<br>
 		Full Pan (${panContents})
 		`;
 	} else if (panContents === "null") {
 		panDetails.innerHTML = `
-		0° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		${temp}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		<br>
 		Empty Pan
 		`;
 	};
 	PAN_ON = true;
-	setInterval(increasePanTemperature, 975);
+	clearInterval(PAN_OFF_INTERVAL)
+	PAN_ON_INTERVAL = setInterval(increasePanTemperature, 975);
 
 };
 
@@ -280,11 +292,13 @@ async function decreasePanTemperature() {
 	if (panContents !== "null") {
 		panDetails.innerHTML = `
 		${temp-1}° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		<br>
 		Full Pan (${panContents})
 		`;
 	} else if (panContents === "null") {
 		panDetails.innerHTML = `
 		${temp-1}° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		<br>
 		Empty Pan
 		`;
 	};
@@ -294,19 +308,29 @@ async function turnOffPan() {
 	const panDetails = document.getElementById("pan-details");
 	const panElement = document.getElementById("pan-holder");
 	const panContents = panElement.getAttribute("data-contents");
+	let temp = parseInt(panElement.getAttribute("data-temperature"));
 	if (panContents !== "null") {
 		panDetails.innerHTML = `
-		0° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		${temp}° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		<br>
 		Full Pan (${panContents})
 		`;
 	} else if (panContents === "null") {
 		panDetails.innerHTML = `
-		0° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		${temp}° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+		<br>
 		Empty Pan
 		`;
 	};
 	PAN_ON = false;
-	setInterval(decreasePanTemperature, 1250);
+	clearInterval(PAN_ON_INTERVAL)
+	PAN_OFF_INTERVAL = setInterval(()=> {
+		if (PAN_ON) {
+			return
+		} else if (!(PAN_ON)) {
+
+		};
+	}, 1250);
 };
 
 async function handlePanToggle() {
