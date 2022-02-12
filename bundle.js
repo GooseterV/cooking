@@ -1,3 +1,4 @@
+
 const INGREDIENTS = {
 	// veggies 
 	"Vegetables":[
@@ -108,7 +109,12 @@ const INGREDIENTS = {
 		"Rigatoni",
 		"Top Burger Bun",
 		"Bottom Burger Bun",
-		"Hotdog Bun"
+		"Hotdog Bun",
+		"Olive Bread",
+		"Baguette",
+		"Italian Bread",
+		"Hardtack",
+		"Challah Bread"
 	],
 	// dairies like milk and cheese
 	"Dairy":[
@@ -500,11 +506,11 @@ async function handlePanToggle() {
 async function attemptMakeMeal(ingredients) {
 	let SELECTED_MEAL;
 	for (let meal of MEALS) {
-		if (meal["Ingredient Names"].all(i=> ingredients.includes(i))) {
+		if (meal["Ingredient Names"].every(i=> ingredients.includes(i))) {
 			SELECTED_MEAL = meal;
 		};
 	};
-	alert("Attempted to make meal: " + SELECTED_MEAL)
+	alert("Attempted to make meal: " + SELECTED_MEAL.Name)
 };
 
 async function addIngredientToMealHolder(ingredient) {
