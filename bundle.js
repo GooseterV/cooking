@@ -200,6 +200,13 @@ const INGREDIENT_IMAGES = {
 	"Beef Patty":"src/beef_patty.png",
 	"Top Burger Bun":"src/top_burger_bun.png",
 	"Bottom Burger Bun":"src/bottom_burger_bun.png",
+	"Almond":"src/almond.png",
+	"Anchovy":"src/anchovy.png",
+	"Asparagus":"src/asparagus.png",
+	"Bacon":"src/bacon.png",
+	"Avocado":"src/avocado.png",
+	"Banana":"src/banana.png",
+	"Basil":"src/basil.png"
 
 };
 const CATGEGORIES = Object.keys(INGREDIENTS);
