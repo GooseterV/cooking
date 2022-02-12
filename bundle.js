@@ -179,7 +179,7 @@ const INGREDIENT_IMAGES = {
 	"Egg":"src/egg_full.png",
 	"Fried Egg":"src/egg_fried.png",
 	"Steak":"src/steak.png",
-	//"Ginger Root":"src/ginger.png",
+	"Ginger Root":"src/ginger.png",
 	"Tomato":"src/tomato.png",
 	"Garlic":"src/garlic.png",
 	"Carrot":"src/carrot.png",
@@ -198,7 +198,7 @@ const INGREDIENT_IMAGES = {
 	"Yellow Bell Pepper":"src/yellow_bell_pepper.png",
 	"Turkey Patty":"src/turkey_patty.png",
 	"Beef Patty":"src/beef_patty.png",
-	"Top Burger Bun":"src/top_burger_bun.png",
+	"Top Burger Bun":"src/burger_bun.png",
 	"Bottom Burger Bun":"src/bottom_burger_bun.png",
 	"Almond":"src/almond.png",
 	"Anchovy":"src/anchovy.png",
@@ -533,8 +533,7 @@ async function addIngredientToMealHolder(ingredient) {
 		mealImageHolder.appendChild(ingredientImage);
 
 	} else if (!(Object.keys(INGREDIENT_IMAGES).includes(ingredient))) {
-		alert(ingredient);
-		alert("Ingredient image not yet added.");
+		alert("Ingredient image not yet added." + ` (${ingredient})`);
 	};
 };
 
