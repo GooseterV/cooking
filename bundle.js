@@ -416,15 +416,25 @@ async function handlePanClick(contents) {
 async function increasePanTemperature() {
 	const panDetails = document.getElementById("pan-details");
 	const panElement = document.getElementById("pan-holder");
+	const panContentsImage = document.getElementById("pan-contents");
 	const panContents = panElement.getAttribute("data-contents");
 	let temp = parseInt(panElement.getAttribute("data-temperature"));
 	panElement.setAttribute("data-temperature", String(temp+1))
 	if (panContents !== "null") {
-		panDetails.innerHTML = `
-		${temp+1}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
-		<br>
-		Full Pan (${panContents})
-		`;
+		if (temp > 250) {
+			panContentsImage.src = "src/charcoal.png";
+			panDetails.innerHTML = `
+			${temp+1}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+			<br>
+			Full Pan (Charcoal)
+			`;
+		} else {
+			panDetails.innerHTML = `
+			${temp+1}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+			<br>
+			Full Pan (${panContents})
+			`;
+		};
 	} else if (panContents === "null") {
 		panDetails.innerHTML = `
 		${temp+1}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
@@ -528,7 +538,7 @@ async function addIngredientToMealHolder(ingredient) {
 		ingredientImage.src = INGREDIENT_IMAGES[ingredient];
 		ingredientImage.width = 27.5;
 		ingredientImage.height = 27.5;
-		//ingredientImage.style = "image-rendering: pixelated;";
+		ingredientImage.style = "image-rendering: pixelated;";
 		
 		mealImageHolder.appendChild(ingredientImage);
 
