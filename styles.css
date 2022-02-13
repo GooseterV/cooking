@@ -92,7 +92,9 @@ button, #ingredient-list span {
 	flex-direction:column;
 }
 
-
+#pan-contents {
+	image-rendering: pixelated;
+}
 
 input, textarea {
 	color:black;

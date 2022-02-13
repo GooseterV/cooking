@@ -176,7 +176,7 @@ const INGREDIENTS = {
 };
 
 const INGREDIENT_IMAGES = {
-	"Egg":"src/egg_full.png",
+	"Egg":"src/egg.png",
 	"Fried Egg":"src/egg_fried.png",
 	"Steak":"src/steak.png",
 	"Ginger Root":"src/ginger.png",
