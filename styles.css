@@ -5,6 +5,13 @@
 	font-family: "Montserrat" !important;
 }
 
+/*
+@media screen and (max-width:720) {
+	html {
+		zoom:50%;
+	}
+}*/
+
 button, #ingredient-list span {
 	border-radius: 10px;
 	align-items: center;
@@ -147,6 +154,13 @@ input, textarea {
 	position:absolute;
 }
 
+body {
+	/*background: url("src/placeholder_dish.png") repeat;*/
+	image-rendering: pixelated;
+	background-size:100px;
+	background-color:rgb(241, 102, 137);
+}
+
 #ingredient-list span {
 	color:rgba(31, 30, 30, 0.685);
 }
@@ -177,6 +191,11 @@ button:hover,  #ingredient-list span:hover{
 #pot-toggle, #pan-toggle {
 	cursor:pointer;
 }
+
+#pan-details, #pot-details {
+	font-weight:bolder;
+}
+
 /*
 img {
 	image-rendering: pixelated;

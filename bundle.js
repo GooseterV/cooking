@@ -582,6 +582,7 @@ async function turnOnPot() {
 	const potDetails = document.getElementById("pot-details");
 	const potElement = document.getElementById("pot-holder");
 	const potContents = potElement.getAttribute("data-contents");
+	const cookingPot = document.getElementById("cooking-pot");
 	let temp = parseInt(potElement.getAttribute("data-temperature"));
 	if (potContents !== "null") {
 		potDetails.innerHTML = `
@@ -597,6 +598,7 @@ async function turnOnPot() {
 		`;
 	};
 	POT_ON = true;
+	cookingPot.src = "src/cooking_pot.gif";
 	clearInterval(POT_OFF_INTERVAL)
 	POT_ON_INTERVAL = setInterval(increasePotTemperature, 1000);
 
@@ -626,6 +628,7 @@ async function decreasePotTemperature() {
 async function turnOffPot() {
 	const potDetails = document.getElementById("pot-details");
 	const potElement = document.getElementById("pot-holder");
+	const cookingPot = document.getElementById("cooking-pot");
 	const potContents = potElement.getAttribute("data-contents");
 	let temp = parseInt(potElement.getAttribute("data-temperature"));
 	if (potContents !== "null") {
@@ -643,6 +646,7 @@ async function turnOffPot() {
 	};
 	POT_ON = false;
 	clearInterval(POT_ON_INTERVAL)
+	cookingPot.src = "src/cooking_pot.png";
 	POT_OFF_INTERVAL = setInterval(()=>{}, 1250);
 };
 
