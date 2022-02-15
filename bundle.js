@@ -176,39 +176,134 @@ const INGREDIENTS = {
 };
 
 const INGREDIENT_IMAGES = {
-	"Egg":"src/egg.png",
-	"Fried Egg":"src/egg_fried.png",
-	"Steak":"src/steak.png",
-	"Ginger Root":"src/ginger.png",
-	"Tomato":"src/tomato.png",
-	"Garlic":"src/garlic.png",
-	"Carrot":"src/carrot.png",
-	"Red Bell Pepper":"src/red_bell_pepper.png",
-	"Orange Bell Pepper":"src/orange_bell_pepper.png",
-	"Green Bell Pepper":"src/green_bell_pepper.png",
-	"Habanero":"src/habanero.png",
-	"Jalapeño":"src/jalapeno.png",
-	"Chili Pepper":"src/chili_pepper.png",
-	"Swiss Cheese":"src/swiss_cheese.png",
-	"Orange":"src/orange.png",
-	"Pear":"src/pear.png",
-	"Apple":"src/apple.png",
-	"Lime":"src/lime.png",
-	"Lemon":"src/lemon.png",
-	"Yellow Bell Pepper":"src/yellow_bell_pepper.png",
-	"Turkey Patty":"src/turkey_patty.png",
-	"Beef Patty":"src/beef_patty.png",
-	"Top Burger Bun":"src/burger_bun.png",
-	"Bottom Burger Bun":"src/bottom_burger_bun.png",
-	"Almond":"src/almond.png",
-	"Anchovy":"src/anchovy.png",
-	"Asparagus":"src/asparagus.png",
-	"Bacon":"src/bacon.png",
-	"Avocado":"src/avocado.png",
-	"Banana":"src/banana.png",
-	"Basil":"src/basil.png"
-
+	"Almond": "src/almond.png",
+	"Anchovy": "src/anchovy.png",
+	"Apple": "src/apple.png",
+	"Apple Butter": "src/apple_butter.png",
+	"Apple Butter Liquid": "src/apple_butter_liquid.png",
+	"Asparagus": "src/asparagus.png",
+	"Avocado": "src/avocado.png",
+	"Bacon": "src/bacon.png",
+	"Banana": "src/banana.png",
+	"Basil": "src/basil.png",
+	"Bay": "src/bay.png",
+	"Beef Chuck": "src/beefChuck.png",
+	"Beef Patty": "src/beef_patty.png",
+	"Beetroot": "src/beetroot.png",
+	"Blackberry": "src/blackberry.png",
+	"Black Pepper": "src/blackPepper.png",
+	"Blueberry": "src/blueberry.png",
+	"Box": "src/box.png",
+	"Bread": "src/bread.png",
+	"Broccoli": "src/broccoli.png",
+	"Brussels Sprouts": "src/brusselsSprouts.png",
+	"Burger Bun": "src/burgerBun.png",
+	"Burger Patty": "src/burgerPatty.png",
+	"Butter": "src/butter.png",
+	"Button Mushroom": "src/buttonMushroom.png",
+	"Cabbage": "src/cabbage.png",
+	"Cantaloupe": "src/cantaloupe.png",
+	"Carrot": "src/carrot.png",
+	"Cashew": "src/cashew.png",
+	"Charcoal": "src/charcoal.png",
+	"Cheddar": "src/cheddar.png",
+	"Cherry": "src/cherry.png",
+	"Chicken Breast": "src/chickenBreast.png",
+	"Chicken Leg": "src/chickenLeg.png",
+	"Chicken Wing": "src/chickenWing.png",
+	"Chili Pepper": "src/chili_pepper.png",
+	"Chives": "src/chives.png",
+	"Cilantro": "src/cilantro.png",
+	"Cinnamon Stick": "src/cinnamonStick.png",
+	"Cocoa": "src/cocoa.png",
+	"Coconut": "src/coconut.png",
+	"Cod": "src/cod.png",
+	"Cooking Pot": "src/cooking_pot.png",
+	"Cooking Pot Bubbles": "src/cooking_pot_bubbles.png",
+	"Cooking Pot Bubbles 1": "src/cooking_pot_bubbles_1.png",
+	"Cooking Pot Bubbles 2": "src/cooking_pot_bubbles_2.png",
+	"Corn Cob": "src/cornCob.png",
+	"Cucumber": "src/cucumber.png",
+	"Dill": "src/dill.png",
+	"Dollar": "src/dollar.png",
+	"Duck Breast": "src/duck_breast.png",
+	"Durian": "src/durian.png",
+	"Egg": "src/egg.png",
+	"Eggplant": "src/eggplant.png",
+	"Empty Pan": "src/empty_pan.png",
+	"English Muffin": "src/englishMuffin.png",
+	"Feta": "src/feta.png",
+	"Fig": "src/fig.png",
+	"Fried Egg": "src/fried_egg.png",
+	"Fusilli": "src/fusilli.png",
+	"Garlic": "src/garlic.png",
+	"Ginger": "src/ginger.png",
+	"Glowing Blue Patty": "src/glowing_blue_patty.png",
+	"Goat Cheese": "src/goatCheese.png",
+	"Gorgonzola": "src/gorgonzola.png",
+	"Gouda": "src/gouda.png",
+	"Grandmas Ashes": "src/grandmas_ashes.png",
+	"Grape": "src/grape.png",
+	"Green Bell Pepper": "src/green_bell_pepper.png",
+	"Guava": "src/guava.png",
+	"Habanero": "src/habanero.png",
+	"Ham": "src/ham.png",
+	"Hardtack": "src/hardtack.png",
+	"Honeydew": "src/honeydew.png",
+	"Horseradish": "src/horseradish.png",
+	"Jalapeno": "src/jalapeno.png",
+	"Kiwi": "src/kiwi.png",
+	"Lamb Chop": "src/lambChop.png",
+	"Lasagna": "src/lasagna.png",
+	"Lemon": "src/lemon.png",
+	"Lime": "src/lime.png",
+	"Lobster": "src/lobster.png",
+	"Mango": "src/mango.png",
+	"Meal Button": "src/meal_button.png",
+	"Milk Jug": "src/milk_jug.png",
+	"Milk Liquid": "src/milk_liquid.png",
+	"Mint Leaf": "src/mintLeaf.png",
+	"Mozzarella": "src/mozzarella.png",
+	"Onion": "src/onion.png",
+	"Orange": "src/orange.png",
+	"Orange Bell Pepper": "src/orange_bell_pepper.png",
+	"Oregano": "src/oregano.png",
+	"Oyster": "src/oyster.png",
+	"Pancake": "src/pancake.png",
+	"Pancetta": "src/pancetta.png",
+	"Pan With Egg": "src/pan_with_egg.png",
+	"Parmesan": "src/parmesan.png",
+	"Parsley": "src/parsley.png",
+	"Parsley Root": "src/parsleyRoot.png",
+	"Parsnip": "src/parsnip.png",
+	"Peach": "src/peach.png",
+	"Peanut": "src/peanut.png",
+	"Pear": "src/pear.png",
+	"Pecan": "src/pecan.png",
+	"Penne": "src/penne.png",
+	"Persimmon": "src/persimmon.png",
+	"Pineapple": "src/pineapple.png",
+	"Red Bell Pepper": "src/red_bell_pepper.png",
+	"Root Beer": "src/root_beer.png",
+	"Root Beer Liquid": "src/root_beer_liquid.png",
+	"Skim Milk": "src/skim_milk.png",
+	"Steak": "src/steak.png",
+	"Swiss Cheese": "src/swiss_cheese.png",
+	"Table": "src/table.png",
+	"Tbone Steak": "src/tbone_steak.png",
+	"Toggle Pan Button": "src/toggle_pan_button.png",
+	"Tomato": "src/tomato.png",
+	"Transparent": "src/transparent.png",
+	"Turkey Patty": "src/turkey_patty.png",
+	"Vodka": "src/vodka.png",
+	"Water Liquid": "src/water_liquid.png",
+	"Whole Milk": "src/whole_milk.png",
+	"Yellow Bell Pepper": "src/yellow_bell_pepper.png",
+	"Zucchini": "src/zucchini.png",
+	"Top Burger Bun": "src/burgerBun.png",
+	"Bottom Burger Bun":"src/burgerBun.png"
 };
+
 const CATGEGORIES = Object.keys(INGREDIENTS);
 const MEALS = [
 	{
@@ -266,6 +361,9 @@ let ACTIVE_INGREDIENT = null;
 let PAN_ON = false;
 let PAN_ON_INTERVAL;
 let PAN_OFF_INTERVAL;
+let POT_ON = false;
+let POT_ON_INTERVAL;
+let POT_OFF_INTERVAL;
 let MEAL_INGREDIENTS = [];
 async function addFood(name, grams) {
 	const food = {
@@ -351,17 +449,19 @@ async function showIngredients() {
 };
 
 async function selectIngredient(ingredient) {
-	ACTIVE_INGREDIENT = ingredient;
-	alert(`Ingredient Selected: ${ACTIVE_INGREDIENT}`);
+	ACTIVE_INGREDIENT = {
+		"Name":ingredient,
+		"Method":"raw",
+		"Cooked Percent":0
+	};
+	alert(`Ingredient Selected: ${ACTIVE_INGREDIENT.Name}`);
 };
 
 async function handleIngredientClick(ingredient) {
-	if (ACTIVE_INGREDIENT === null && ACTIVE_INGREDIENT !== ingredient) {
-		selectIngredient(ingredient);
-	} else if (ACTIVE_INGREDIENT !== null && ACTIVE_INGREDIENT === ingredient) {
+	if (ACTIVE_INGREDIENT !== null && ACTIVE_INGREDIENT.Name === ingredient) {
 		ACTIVE_INGREDIENT = null;
 		alert(`Ingredient Deselected: ${ingredient}`);
-	} else if (ACTIVE_INGREDIENT !== null && ingredient !== ACTIVE_INGREDIENT){
+	} else if (ACTIVE_INGREDIENT !== null && ingredient !== ACTIVE_INGREDIENT.Name){
 		selectIngredient(ingredient);
 	} else {
 		selectIngredient(ingredient);
@@ -373,22 +473,37 @@ async function addIngredientToPan(ingredient) {
 	const panDetails = document.getElementById("pan-details");
 	let temp = parseInt(panElement.getAttribute("data-temperature"));
 	ACTIVE_INGREDIENT = null;
-	if (Object.keys(INGREDIENT_IMAGES).includes(ingredient)) {
-		if (ingredient === "Egg") {
+	if (Object.keys(INGREDIENT_IMAGES).includes(ingredient.Name)) {
+		if (ingredient.Name === "Egg") {
 			document.getElementById("pan-contents").src = INGREDIENT_IMAGES["Fried Egg"];
 		} else {
-			document.getElementById("pan-contents").src = INGREDIENT_IMAGES[ingredient];
+			document.getElementById("pan-contents").src = INGREDIENT_IMAGES[ingredient.Name];
 		};
 		panDetails.innerHTML = `
 		${temp}° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		<br>
-		Full Pan (${ingredient})
+		Full Pan (${ingredient.Name})
 		`;
 	} else {
 		alert("Food image not yet added.");
 	};
 	
-	panElement.setAttribute("data-contents", ingredient);
+	panElement.setAttribute("data-contents", JSON.stringify(ingredient));
+
+};
+
+async function addIngredientToPot(ingredient) {
+	const potElement = document.getElementById("pot-holder");
+	const potDetails = document.getElementById("pot-details");
+	let temp = parseInt(potElement.getAttribute("data-temperature"));
+	ACTIVE_INGREDIENT = null;
+	potDetails.innerHTML = `
+		${temp}° (Off) <img id="pot-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+		<br>
+		Full Pot 
+	`;
+	
+	potElement.setAttribute("data-contents", JSON.stringify(ingredient));
 
 };
 
@@ -397,7 +512,7 @@ async function handlePanClick(contents) {
 	const panDetails = document.getElementById("pan-details");
 	let temp = parseInt(panElement.getAttribute("data-temperature"));
 	if (ACTIVE_INGREDIENT === null && contents !== "null") {
-		ACTIVE_INGREDIENT = contents;
+		ACTIVE_INGREDIENT = JSON.parse(contents);
 		panElement.setAttribute("data-contents", "null");
 		document.getElementById("pan-contents").src = "src/transparent.png";
 		turnOffPan();
@@ -413,6 +528,132 @@ async function handlePanClick(contents) {
 	};
 };
 
+async function handlePotClick(contents) {
+	const potElement = document.getElementById("pot-holder");
+	const potDetails = document.getElementById("pot-details");
+	let temp = parseInt(potElement.getAttribute("data-temperature"));
+	if (ACTIVE_INGREDIENT === null && contents !== "null") {
+		ACTIVE_INGREDIENT = JSON.parse(contents);
+		potElement.setAttribute("data-contents", "null");
+		turnOffPot();
+		potDetails.innerHTML = `
+		${temp}° (Off) <img id="pot-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+		<br>
+		Empty Pot
+		`;
+	} else if (contents === "null" && ACTIVE_INGREDIENT !== null) {
+		addIngredientToPot(ACTIVE_INGREDIENT);
+	} else if (contents !== "null" && ACTIVE_INGREDIENT !== null) {
+		alert("Pot is already full!");
+	};
+};
+
+async function increasePotTemperature() {
+	const potDetails = document.getElementById("pot-details");
+	const potElement = document.getElementById("pot-holder");
+	const potContents = potElement.getAttribute("data-contents");
+	let temp = parseInt(potElement.getAttribute("data-temperature"));
+	potElement.setAttribute("data-temperature", String(temp+1))
+	if (potContents !== "null") {
+		if (temp > 250) {
+			potElement.setAttribute("data-contents", JSON.stringify({"Name":"Charcoal", "Method":"Burnt", "Cook Percentage":100}))
+			potDetails.innerHTML = `
+			${temp+1}° (On) <img id="pot-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+			<br>
+			Full Pot (Charcoal)
+			`;
+		} else {
+			potDetails.innerHTML = `
+			${temp+1}° (On) <img id="pot-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+			<br>
+			Full Pot
+			`;
+		};
+	} else if (potContents === "null") {
+		potDetails.innerHTML = `
+		${temp+1}° (On) <img id="pot-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+		<br>
+		Empty Pot
+		`;
+	};
+};
+
+async function turnOnPot() {
+	const potDetails = document.getElementById("pot-details");
+	const potElement = document.getElementById("pot-holder");
+	const potContents = potElement.getAttribute("data-contents");
+	let temp = parseInt(potElement.getAttribute("data-temperature"));
+	if (potContents !== "null") {
+		potDetails.innerHTML = `
+		${temp}° (On) <img id="pot-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+		<br>
+		Full Pot
+		`;
+	} else if (potContents === "null") {
+		potDetails.innerHTML = `
+		${temp}° (On) <img id="pot-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+		<br>
+		Empty Pot
+		`;
+	};
+	POT_ON = true;
+	clearInterval(POT_OFF_INTERVAL)
+	POT_ON_INTERVAL = setInterval(increasePotTemperature, 1000);
+
+};
+
+async function decreasePotTemperature() {
+	const potDetails = document.getElementById("pot-details");
+	const potElement = document.getElementById("pot-holder");
+	const potContents = potElement.getAttribute("data-contents");
+	let temp = parseInt(potElement.getAttribute("data-temperature"));
+	potElement.setAttribute("data-temperature", String(temp-1))
+	if (potContents !== "null") {
+		potDetails.innerHTML = `
+		${temp-1}° (Off) <img id="pot-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+		<br>
+		Full Pot
+		`;
+	} else if (potContents === "null") {
+		potDetails.innerHTML = `
+		${temp-1}° (Off) <img id="pot-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+		<br>
+		Empty Pot
+		`;
+	};
+};
+
+async function turnOffPot() {
+	const potDetails = document.getElementById("pot-details");
+	const potElement = document.getElementById("pot-holder");
+	const potContents = potElement.getAttribute("data-contents");
+	let temp = parseInt(potElement.getAttribute("data-temperature"));
+	if (potContents !== "null") {
+		potDetails.innerHTML = `
+		${temp}° (Off) <img id="pot-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+		<br>
+		Full Pot
+		`;
+	} else if (potContents === "null") {
+		potDetails.innerHTML = `
+		${temp}° (Off) <img id="pot-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+		<br>
+		Empty Pot
+		`;
+	};
+	POT_ON = false;
+	clearInterval(POT_ON_INTERVAL)
+	POT_OFF_INTERVAL = setInterval(()=>{}, 1250);
+};
+
+async function handlePotToggle() {
+	if (POT_ON) {
+		turnOffPot();
+	} else if (!(POT_ON)) {
+		turnOnPot();
+	};
+};
+
 async function increasePanTemperature() {
 	const panDetails = document.getElementById("pan-details");
 	const panElement = document.getElementById("pan-holder");
@@ -422,20 +663,27 @@ async function increasePanTemperature() {
 	panElement.setAttribute("data-temperature", String(temp+1))
 	if (panContents !== "null") {
 		if (temp > 250) {
+			panElement.setAttribute("data-contents", JSON.stringify({"Name":"Charcoal", "Method":"Burnt", "Cook Percentage":100}))
 			panContentsImage.src = "src/charcoal.png";
+			panContentsImage.style = `filter: brightness(${String(100-(temp/2)+(59/2))}%);`;
 			panDetails.innerHTML = `
 			${temp+1}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 			<br>
 			Full Pan (Charcoal)
 			`;
 		} else {
+			let pc = JSON.parse(panContents);
+			pc["Cook Percentage"] = (temp/2)+(59/2);
+			panElement.setAttribute("data-contents", JSON.stringify(pc));
+			panContentsImage.style = `filter: brightness(${String(100-(temp/2)+(59/2))}%);`;
 			panDetails.innerHTML = `
 			${temp+1}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 			<br>
-			Full Pan (${panContents})
+			Full Pan (${JSON.parse(panContents).Name})
 			`;
 		};
 	} else if (panContents === "null") {
+		//panContentsImage.style = `filter: brightness(${String(100-(temp/2)+(59/2))}%);`;
 		panDetails.innerHTML = `
 		${temp+1}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		<br>
@@ -453,7 +701,7 @@ async function turnOnPan() {
 		panDetails.innerHTML = `
 		${temp}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		<br>
-		Full Pan (${panContents})
+		Full Pan (${JSON.parse(panContents).Name})
 		`;
 	} else if (panContents === "null") {
 		panDetails.innerHTML = `
@@ -471,16 +719,19 @@ async function turnOnPan() {
 async function decreasePanTemperature() {
 	const panDetails = document.getElementById("pan-details");
 	const panElement = document.getElementById("pan-holder");
-	const panContents = panElement.getAttribute("data-contents");
+	const panContents = JSON.parse(panElement.getAttribute("data-contents"));
+	const panContentsImage = document.getElementById("pan-contents");
 	let temp = parseInt(panElement.getAttribute("data-temperature"));
 	panElement.setAttribute("data-temperature", String(temp-1))
 	if (panContents !== "null") {
+		panContentsImage.style = `filter: brightness(${String(100-(temp/2)+(59/2))}%);`;
 		panDetails.innerHTML = `
 		${temp-1}° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		<br>
-		Full Pan (${panContents})
+		Full Pan (${JSON.parse(panContents).Name})
 		`;
 	} else if (panContents === "null") {
+		panContentsImage.style = `filter: brightness(${String(100-(temp/2)+(59/2))}%);`;
 		panDetails.innerHTML = `
 		${temp-1}° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		<br>
@@ -498,7 +749,7 @@ async function turnOffPan() {
 		panDetails.innerHTML = `
 		${temp}° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		<br>
-		Full Pan (${panContents})
+		Full Pan (${JSON.parse(panContents).Name})
 		`;
 	} else if (panContents === "null") {
 		panDetails.innerHTML = `
@@ -508,7 +759,7 @@ async function turnOffPan() {
 		`;
 	};
 	PAN_ON = false;
-	clearInterval(PAN_ON_INTERVAL)
+	clearInterval(PAN_ON_INTERVAL);
 	PAN_OFF_INTERVAL = setInterval(()=>{}, 1250);
 };
 
@@ -523,7 +774,7 @@ async function handlePanToggle() {
 async function attemptMakeMeal(ingredients) {
 	let SELECTED_MEAL;
 	for (let meal of MEALS) {
-		if (meal["Ingredient Names"].every(i=> ingredients.includes(i))) {
+		if (ingredients.every(i=> meal["Ingredient Names"].includes(i.Name))) {
 			SELECTED_MEAL = meal;
 		};
 	};
@@ -533,17 +784,17 @@ async function attemptMakeMeal(ingredients) {
 async function addIngredientToMealHolder(ingredient) {
 	const mealTable = document.getElementById("meal-maker");
 	const mealImageHolder = document.getElementById("meal-contents-image-holder");
-	if (Object.keys(INGREDIENT_IMAGES).includes(ingredient)) {
+	if (Object.keys(INGREDIENT_IMAGES).includes(ingredient.Name)) {
 		let ingredientImage = document.createElement("img");
-		ingredientImage.src = INGREDIENT_IMAGES[ingredient];
+		ingredientImage.src = INGREDIENT_IMAGES[ingredient.Name];
 		ingredientImage.width = 27.5;
 		ingredientImage.height = 27.5;
-		ingredientImage.style = "image-rendering: pixelated;";
+		ingredientImage.style = `image-rendering: pixelated; filter: blur(${100-ingredient["Cook Percentage"]}%);`;
 		
 		mealImageHolder.appendChild(ingredientImage);
 
-	} else if (!(Object.keys(INGREDIENT_IMAGES).includes(ingredient))) {
-		alert("Ingredient image not yet added." + ` (${ingredient})`);
+	} else if (!(Object.keys(INGREDIENT_IMAGES).includes(ingredient.Name))) {
+		alert("Ingredient image not yet added." + ` (${ingredient.Name})`);
 	};
 };
 
@@ -551,9 +802,9 @@ async function handleMealMakeClick() {
 	const mealButton = document.getElementById("meal-maker");
 	const mealIngredientsHolder = document.getElementById("meal-contents-image-holder");
 	let mealIngredients = mealButton.getAttribute("data-ingredients");
-	if (ACTIVE_INGREDIENT !== null || ACTIVE_INGREDIENT) {
+	if (ACTIVE_INGREDIENT !== null) {
 		MEAL_INGREDIENTS.push(ACTIVE_INGREDIENT);
-		if (MEAL_INGREDIENTS.length < 3) {
+		if (MEAL_INGREDIENTS.length <= 3) {
 			addIngredientToMealHolder(ACTIVE_INGREDIENT);
 		};
 		ACTIVE_INGREDIENT = null;

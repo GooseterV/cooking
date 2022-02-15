@@ -16,7 +16,7 @@ button, #ingredient-list span {
 	border: 0.67rem solid transparent;
 	text-decoration: none;
 	background-color:#50affdbe;
-	transition: .2s ease-in-out 0s;
+	transition: .7s ease-in-out 1s;
 	font-weight:light;
 }
 
@@ -32,30 +32,45 @@ button, #ingredient-list span {
 	font-size:15px !important;
 	font-weight:bold !important;
 	color:black !important;
+	transition:0.7s;
 }
 
-#pan-holder {
+#pan-holder, #pot-holder {
 	float:right;
 	left:85%;
 	position:absolute;
-	margin-top:5px;
-	margin-bottom:1px;
 	text-align:center;
 }
 
-#pan-details p {
+#pot-holder, #pan-holder {
+	position:absolute;
+}
+
+
+#pan-details p, #pot-details p {
 	text-align:center;
 }
 
-#pan-holder img {
+/*
+#pan-details, #pot-details {
+	opacity:0;
+	transition: 0.3s;
+}
+
+#pan-images-holder:hover + #pan-details, #pan-details:hover {
+	opacity:1;
+	display:inline;
+	
+}*/
+
+/*
+#pan-holder img{
 	transform:rotate(45deg);
-}
+}*/
 
-
-#pan-contents {
+#pan-contents{
 	position:relative;
-	top:-50px;
-	left:-43.5px;
+	transform: translate(-130%, -150%);
 }
 
 .rfl {
@@ -74,6 +89,7 @@ button, #ingredient-list span {
 	display:flex;
 	flex-direction:column;
 	border-bottom: 0.67rem solid transparent;
+	transition:0.7s;
 }
 
 .ingredient-columm {
@@ -87,12 +103,17 @@ button, #ingredient-list span {
 	border-bottom: 0.67rem solid transparent;
 }
 
+#cooking-pan {
+	transform:rotate(45deg);
+}
+
 .category-contents {
 	display:flex;
 	flex-direction:column;
+	transition:0.7s;
 }
 
-#pan-contents {
+#pan-contents{
 	image-rendering: pixelated;
 }
 
@@ -123,6 +144,7 @@ input, textarea {
 .row {
 	display:flex;
 	flex-direction:row;
+	position:absolute;
 }
 
 #ingredient-list span {
@@ -152,6 +174,9 @@ button:hover,  #ingredient-list span:hover{
 	left:10px;
 }
 
+#pot-toggle, #pan-toggle {
+	cursor:pointer;
+}
 /*
 img {
 	image-rendering: pixelated;
