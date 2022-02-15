@@ -47,6 +47,7 @@ button, #ingredient-list span {
 	left:85%;
 	position:absolute;
 	text-align:center;
+	width:200px;
 }
 
 #pot-holder, #pan-holder {
