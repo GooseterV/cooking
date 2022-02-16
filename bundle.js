@@ -513,6 +513,7 @@ async function handlePanClick(contents) {
 	let temp = parseInt(panElement.getAttribute("data-temperature"));
 	if (ACTIVE_INGREDIENT === null && contents !== "null") {
 		ACTIVE_INGREDIENT = JSON.parse(contents);
+		alert(ACTIVE_INGREDIENT["Cook Percentage"])
 		panElement.setAttribute("data-contents", "null");
 		document.getElementById("pan-contents").src = "src/transparent.png";
 		turnOffPan();
@@ -555,7 +556,7 @@ async function increasePotTemperature() {
 	let temp = parseInt(potElement.getAttribute("data-temperature"));
 	potElement.setAttribute("data-temperature", String(temp+1))
 	if (potContents !== "null") {
-		if (temp > 250) {
+		if (temp > 500) {
 			potElement.setAttribute("data-contents", JSON.stringify({"Name":"Charcoal", "Method":"Burnt", "Cook Percentage":100}))
 			potDetails.innerHTML = `
 			${temp+1}° (On) <img id="pot-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
@@ -563,6 +564,9 @@ async function increasePotTemperature() {
 			Full Pot (Charcoal)
 			`;
 		} else {
+			let pc = JSON.parse(potContents);
+			pc["Cook Percentage"] = (temp-59)/2;
+			potElement.setAttribute("data-contents", JSON.stringify(pc));
 			potDetails.innerHTML = `
 			${temp+1}° (On) <img id="pot-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
 			<br>
@@ -666,10 +670,10 @@ async function increasePanTemperature() {
 	let temp = parseInt(panElement.getAttribute("data-temperature"));
 	panElement.setAttribute("data-temperature", String(temp+1))
 	if (panContents !== "null") {
-		if (temp > 250) {
+		if (temp > 500) {
 			panElement.setAttribute("data-contents", JSON.stringify({"Name":"Charcoal", "Method":"Burnt", "Cook Percentage":100}))
 			panContentsImage.src = "src/charcoal.png";
-			panContentsImage.style = `filter: brightness(${String(100-(temp/2)+(59/2))}%);`;
+			panContentsImage.style = `filter: brightness(${String(100-((temp-59)/2))}%);`;
 			panDetails.innerHTML = `
 			${temp+1}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 			<br>
@@ -677,9 +681,9 @@ async function increasePanTemperature() {
 			`;
 		} else {
 			let pc = JSON.parse(panContents);
-			pc["Cook Percentage"] = (temp/2)+(59/2);
+			pc["Cook Percentage"] = (temp-59)/2;
 			panElement.setAttribute("data-contents", JSON.stringify(pc));
-			panContentsImage.style = `filter: brightness(${String(100-(temp/2)+(59/2))}%);`;
+			panContentsImage.style = `filter: brightness(${String(100-((temp-59)/2))}%);`;
 			panDetails.innerHTML = `
 			${temp+1}° (On) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 			<br>
@@ -728,14 +732,14 @@ async function decreasePanTemperature() {
 	let temp = parseInt(panElement.getAttribute("data-temperature"));
 	panElement.setAttribute("data-temperature", String(temp-1))
 	if (panContents !== "null") {
-		panContentsImage.style = `filter: brightness(${String(100-(temp/2)+(59/2))}%);`;
+		panContentsImage.style = `filter: brightness(${String(100-((temp-59)/2))}%);`;
 		panDetails.innerHTML = `
 		${temp-1}° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		<br>
 		Full Pan (${JSON.parse(panContents).Name})
 		`;
 	} else if (panContents === "null") {
-		panContentsImage.style = `filter: brightness(${String(100-(temp/2)+(59/2))}%);`;
+		panContentsImage.style = `filter: brightness(${String(100-((temp-59)/2))}%);`;
 		panDetails.innerHTML = `
 		${temp-1}° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		<br>
@@ -793,7 +797,7 @@ async function addIngredientToMealHolder(ingredient) {
 		ingredientImage.src = INGREDIENT_IMAGES[ingredient.Name];
 		ingredientImage.width = 27.5;
 		ingredientImage.height = 27.5;
-		ingredientImage.style = `image-rendering: pixelated; filter: blur(${100-ingredient["Cook Percentage"]}%);`;
+		ingredientImage.style = `image-rendering: pixelated; filter: brightness(${100-parseInt(ingredient["Cook Percentage"])}%);`;
 		
 		mealImageHolder.appendChild(ingredientImage);
 
