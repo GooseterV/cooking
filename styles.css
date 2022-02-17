@@ -12,7 +12,8 @@
 	}
 }*/
 
-button, #ingredient-list span {
+button,
+#ingredient-list span {
 	border-radius: 10px;
 	align-items: center;
 	justify-content: center;
@@ -22,41 +23,44 @@ button, #ingredient-list span {
 	text-decoration: none;
 	border: 0.67rem solid transparent;
 	text-decoration: none;
-	background-color:#50affdbe;
+	background-color: #50affdbe;
 	transition: .7s ease-in-out 1s;
-	font-weight:light;
+	font-weight: light;
 }
 
 .ingredient-button {
-	background-color:transparent !important;
-	font-size:12px;
-	margin-bottom:-10px;
-	height:15px;
+	background-color: transparent !important;
+	font-size: 12px;
+	margin-bottom: -10px;
+	height: 15px;
 
 }
 
 .category {
-	font-size:15px !important;
-	font-weight:bold !important;
-	color:black !important;
-	transition:0.7s;
+	font-size: 15px !important;
+	font-weight: bold !important;
+	color: black !important;
+	transition: 0.7s;
 }
 
-#pan-holder, #pot-holder {
-	float:right;
-	left:85%;
-	position:absolute;
-	text-align:center;
-	width:200px;
+#pan-holder,
+#pot-holder {
+	float: right;
+	left: 85%;
+	position: absolute;
+	text-align: center;
+	width: 200px;
 }
 
-#pot-holder, #pan-holder {
-	position:absolute;
+#pot-holder,
+#pan-holder {
+	position: absolute;
 }
 
 
-#pan-details p, #pot-details p {
-	text-align:center;
+#pan-details p,
+#pot-details p {
+	text-align: center;
 }
 
 /*
@@ -76,128 +80,156 @@ button, #ingredient-list span {
 	transform:rotate(45deg);
 }*/
 
-#pan-contents{
-	position:relative;
+#pan-contents {
+	position: relative;
 	transform: translate(-130%, -150%);
 }
 
 .rfl {
-	float:right;
-	left:75%;
+	float: right;
+	left: 75%;
 
 }
 
 
 
 #ingredient-list {
-	border-radius:7px;
-	position:relative;
-	border-radius:7px;
-	height:auto;
-	display:flex;
-	flex-direction:column;
+	border-radius: 7px;
+	position: relative;
+	border-radius: 7px;
+	height: auto;
+	display: flex;
+	flex-direction: column;
 	border-bottom: 0.67rem solid transparent;
-	transition:0.7s;
+	transition: 0.7s;
 }
 
 .ingredient-columm {
-	display:flex;
-	flex-direction:column;
+	display: flex;
+	flex-direction: column;
 	border-bottom: 0.67rem solid transparent;
-	background-color:rgba(181, 241, 241, 0.637);
-	position:relative;
-	border-radius:7px;
-	height:auto;
+	background-color: rgba(181, 241, 241, 0.637);
+	position: relative;
+	border-radius: 7px;
+	height: auto;
 	border-bottom: 0.67rem solid transparent;
 }
 
 #cooking-pan {
-	transform:rotate(45deg);
+	transform: rotate(45deg);
 }
 
 .category-contents {
-	display:flex;
-	flex-direction:column;
-	transition:0.7s;
+	display: flex;
+	flex-direction: column;
+	transition: 0.7s;
 }
 
-#pan-contents{
+#pan-contents {
 	image-rendering: pixelated;
 }
 
-input, textarea {
-	color:black;
+input,
+textarea {
+	color: black;
 	border-radius: 10px;
 	font-weight: bold;
 	font-size: 15px;
 	text-decoration: none;
 	border: 0.67rem solid transparent;
-	background-color:#50affdbe;
-	outline:none;
+	background-color: #50affdbe;
+	outline: none;
 	vertical-align: top;
-	
+
 }
 
 
 
-#food-input, #ingredient-input {
-	margin-right:10px;
+#food-input,
+#ingredient-input {
+	margin-right: 10px;
 }
 
 ::placeholder {
-	color:black;
-	opacity:1;
+	color: black;
+	opacity: 1;
 }
 
 .row {
-	display:flex;
-	flex-direction:row;
-	position:absolute;
+	display: flex;
+	flex-direction: row;
+	position: absolute;
 }
 
 body {
 	/*background: url("src/placeholder_dish.png") repeat;*/
 	image-rendering: pixelated;
-	background-size:100px;
-	background-color:rgb(241, 102, 137);
+	background-size: 100px;
+	background-color: rgb(241, 102, 137);
 }
 
 #ingredient-list span {
-	color:rgba(31, 30, 30, 0.685);
+	color: rgba(31, 30, 30, 0.685);
 }
 
-button:hover,  #ingredient-list span:hover{
-	cursor:pointer !important;
+button:hover,
+#ingredient-list span:hover {
+	cursor: pointer !important;
 }
 
 #ingredient-storage:hover {
-	cursor:pointer;
+	cursor: pointer;
 }
 
-#meal-maker {
-	position:absolute;
-	left:50%;
-	top:50%;
-	transform:translate(-50%, -50%);
+#meal-button-holder {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: row;
 }
 
 #meal-contents-image-holder {
-	display:flex;
-	flex-direction:row;
-	position:relative;
-	top:-69px;
-	left:10px;
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	top: -69px;
+	left: 10px;
 }
 
-#pot-toggle, #pan-toggle {
-	cursor:pointer;
+#pot-toggle,
+#pan-toggle {
+	cursor: pointer;
 }
 
-#pan-details, #pot-details {
-	font-weight:bolder;
+#pan-details,
+#pot-details {
+	font-weight: bolder;
 }
 
 /*
 img {
 	image-rendering: pixelated;
 }*/
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+	scrollbar-width: auto;
+	scrollbar-color: #ff0f63;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+	width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: #ff0f63;
+	border-radius: 10px;
+}

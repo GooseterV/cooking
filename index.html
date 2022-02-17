@@ -1,25 +1,27 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<link rel="stylesheet" href="styles.css">
-		<meta charset="utf-8"/>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="cache-control" content="no-cache">
 		<title>Cooking</title>
 		<link rel="icon" href="src/pan_with_egg.png">
+		<link rel="stylesheet" href="styles.css">
 	</head>
 	<body>
-		<script src="bundle.js"></script>
 		<div class="row">
-			<img src="src/box.png" onclick="showIngredients()" id="ingredient-storage" width="114.67px" height="100px" style="image-rendering: pixelated;"/>
+			<img src="src/box.png" onclick="showIngredients()" id="ingredient-storage" width="114.67px" height="100px" style="image-rendering: pixelated;" alt="Box Image"/>
 			<div id="ingredient-list" style="display:flex;">
 				
 			</div>		
 		</div>
 		<div id="pan-holder" data-contents="null" data-temperature="59" >
 			<div id="pan-images-holder" onclick="handlePanClick(this.parentElement.getAttribute('data-contents'))" style="cursor:pointer;">
-				<img src="src/empty_pan.png" id="cooking-pan" width="69px" height="100px" style="image-rendering: pixelated;"/>
-				<img src="src/transparent.png" id="pan-contents" width="32.5px" height="32.5px" />
+				<img src="src/empty_pan.png" id="cooking-pan" alt="Cooking Pan" width="69px" height="100px" style="image-rendering: pixelated;"/>
+				<img src="src/transparent.png" id="pan-contents" alt="Pan Food Contents" width="32.5px" height="32.5px" />
 			</div>
 			<span id="pan-details" style="position: relative; left:-10px; z-index: index 200;">
-				59° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200; cursor:pointer;" onclick="handlePanToggle()"/>
+				59° (Off) <img id="pan-toggle" src="src/toggle_pan_button.png" alt="Pan Toggle Button" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200; cursor:pointer;" onclick="handlePanToggle()"/>
 				<br>
 				Empty Pan
 			</span>
@@ -27,19 +29,23 @@
 		</div>
 		<div id="pot-holder" data-contents="null" data-temperature="59" style="margin-top:10rem; left:84.5%;">
 			<div id="pot-images-holder" onclick="handlePotClick(this.parentElement.getAttribute('data-contents'))" style="cursor:pointer;">
-				<img src="src/cooking_pot.png" id="cooking-pot" width="100px" height="100px" style="image-rendering: pixelated;"/>
+				<img src="src/cooking_pot.png" id="cooking-pot" alt="Cooking Pot" width="100px" height="100px" style="image-rendering: pixelated;"/>
 			</div>
 			<span id="pot-details" style="position: relative; z-index: index 200; ">
-				59° (Off) <img id="pot-toggle" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200; cursor:pointer;" onclick="handlePotToggle()"/>
+				59° (Off) <img id="pot-toggle" src="src/toggle_pan_button.png" alt="Pot Toggle Button" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200; cursor:pointer;" onclick="handlePotToggle()"/>
 				<br>
 				Empty Pot
 			</span>
 		</div>
-		<div id="meal-maker" style="cursor:pointer;" onclick="handleMealMakeClick()" data-ingredients="null">
-			<img src="src/table.png" id="table-image" width="100px" height="89.65px" style="image-rendering: pixelated;"/>
-			<div id="meal-contents-image-holder">
-				
+		<div id="meal-button-holder">
+			<div id="meal-maker" style="cursor:pointer;" onclick="handleMealMakeClick()" data-ingredients="null">
+				<img src="src/table.png" id="table-image" width="100px" alt="Table Image" height="89.65px" style="image-rendering: pixelated;"/>
+				<div id="meal-contents-image-holder">
+					
+				</div>
 			</div>
+			<img id="meal-make-button" style="top: 21.5px; position:relative; cursor:pointer;" width="37.5px" height="37.5px" src="src/meal_button.png" onclick="attemptMakeMeal(JSON.parse(document.getElementById('meal-maker').getAttribute('data-ingredients')))" alt="Meal Creation Button"/>
 		</div>
+		<script src="bundle.js"></script>
 	</body>
 </html>
