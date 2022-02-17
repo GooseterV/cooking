@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&family=Noto+Sans+JP&family=Red+Hat+Display:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100&family=Montserrat:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Montserrat:wght@300;500&display=swap');
 
 * {
 	font-family: "Montserrat" !important;
@@ -165,7 +165,6 @@ body {
 	/*background: url("src/placeholder_dish.png") repeat;*/
 	image-rendering: pixelated;
 	background-size: 100px;
-	background-color: rgb(241, 102, 137);
 }
 
 #ingredient-list span {
@@ -222,7 +221,7 @@ img {
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-	width: 16px;
+	width: 13px;
 }
 
 *::-webkit-scrollbar-track {
@@ -232,4 +231,57 @@ img {
 *::-webkit-scrollbar-thumb {
 	background-color: #ff0f63;
 	border-radius: 10px;
+}
+
+
+
+.box-config {
+	top:50%;
+	left:50%;
+	position:absolute;
+	transform:translate(-50%, -50%);
+	display:flex;
+	flex-direction:column;
+	overflow-x:hidden;
+}
+
+#config-json {
+	background-color:black;
+	color:white;
+	font-family:"JetBrains Mono" !important;
+	border-radius:7.5px;
+	border:transparent;
+	outline:none;
+	padding:3px;
+}
+
+
+.box-config span {
+	left:50%;
+	
+}
+
+.material-icons {
+	font-family: 'Material Icons' !important;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 30px;  /* Preferred icon size */
+	display: inline-block;
+	line-height: 1;
+	text-transform: none;
+	letter-spacing: normal;
+	word-wrap: normal;
+	white-space: nowrap;
+	direction: ltr;
+  
+	/* Support for all WebKit browsers. */
+	-webkit-font-smoothing: antialiased;
+	/* Support for Safari and Chrome. */
+	text-rendering: optimizeLegibility;
+  
+	/* Support for Firefox. */
+	-moz-osx-font-smoothing: grayscale;
+  
+	/* Support for IE. */
+	font-feature-settings: 'liga';
 }

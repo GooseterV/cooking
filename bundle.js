@@ -319,8 +319,8 @@ const INGREDIENT_IMAGES = {
 	"Lake Whitefish":"src/lake_whitefish.png",
 	"Scallop":"src/scallop.png",
 	"Scallion":"src/scallion.png",
-	"Trout":"src/trout.png"
-
+	"Trout":"src/trout.png",
+	"Salmon":"src/salmon.png"
 
 };
 
@@ -386,6 +386,8 @@ let POT_ON = false;
 let POT_ON_INTERVAL;
 let POT_OFF_INTERVAL;
 let MEAL_INGREDIENTS = [];
+let CONFIG_ON = false;
+let CONFIG;
 
 const sleep = (ms) => {return new Promise(resolve => setTimeout(resolve, ms))};
 
@@ -600,7 +602,7 @@ async function increasePotTemperature() {
 	let temp = parseInt(potElement.getAttribute("data-temperature"));
 	potElement.setAttribute("data-temperature", String(temp+1))
 	if (potContents !== "null") {
-		if (temp > 500) {
+		if (temp > 500 && CONFIG.charcoalization) {
 			potElement.setAttribute("data-contents", JSON.stringify([{"Name":"Charcoal Stew", "Method":"Burnt", "Cook Percentage":100, "Temp":temp}]))
 			potDetails.innerHTML = `
 			${temp+1}° (On) <img id="pot-toggle" alt="Pot Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
@@ -714,7 +716,7 @@ async function increasePanTemperature() {
 	let temp = parseInt(panElement.getAttribute("data-temperature"));
 	panElement.setAttribute("data-temperature", String(temp+1))
 	if (panContents !== "null") {
-		if (temp > 500) {
+		if (temp > 500 && CONFIG.charcoalization) {
 			panElement.setAttribute("data-contents", JSON.stringify({"Name":"Charcoal", "Method":"Burnt", "Cook Percentage":100, "Temp":temp}))
 			panContentsImage.src = "src/charcoal.png";
 			panContentsImage.style = `filter: brightness(${String(100-((temp-59)/4))}%);`;
@@ -856,7 +858,7 @@ async function handleMealMakeClick() {
 	const mealButton = document.getElementById("meal-maker");
 	const mealIngredientsHolder = document.getElementById("meal-contents-image-holder");
 	let mealIngredients = mealButton.getAttribute("data-ingredients");
-	if (ACTIVE_INGREDIENT !== null) {
+	if (ACTIVE_INGREDIENT !== null && ACTIVE_INGREDIENT !== "null") {
 		MEAL_INGREDIENTS.push(ACTIVE_INGREDIENT);
 		if (MEAL_INGREDIENTS.length <= 3) {
 			addIngredientToMealHolder(ACTIVE_INGREDIENT);
@@ -929,14 +931,75 @@ async function evenTableContentsTemp() {
 };
 
 async function evenTemperatures() {
-	await setInterval(evenTableContentsTemp, 9750);
-	await setInterval(evenPotTemp, 15750);
-	await setInterval(evenPanTemp, 13575);
-	await setInterval(evenActiveIngredientTemp, 7895);
+	setInterval(evenTableContentsTemp, 9750);
+	setInterval(evenPotTemp, 15750);
+	setInterval(evenPanTemp, 13575);
+	setInterval(evenActiveIngredientTemp, 7895);
+};
+
+async function toggleConfig() {
+	const configBox = document.getElementById('config-box');
+	const main = document.getElementById("main");
+	if (!CONFIG_ON) {
+		main.style = "display:none;"
+		configBox.style="";
+		CONFIG_ON = true;
+	} else if (CONFIG_ON) {
+		main.style = "";
+		configBox.style = "display:none";
+		CONFIG_ON = false;
+	};
+};
+
+async function updateConfig(newConfig) {
+	CONFIG = newConfig;
+	localStorage.config = JSON.stringify(CONFIG);
+	document.body.style = "background-color: " + CONFIG.background_color + ";";
+};
+
+
+async function resetConfig() {
+	const configJson = document.getElementById("config-json");
+	CONFIG = {
+		"normalization":true,
+		"charcoalization":true,
+		"pot_mode":"stew",
+		"theme":{
+			"background_color":"#f16689"
+		}
+		
+	}
+	localStorage.config = JSON.stringify(CONFIG);
+	configJson.innerText = JSON.stringify(CONFIG, null, 2);
+
 };
 
 const onStartup = async () => {
-	await evenTemperatures();
+	const configJson = document.getElementById("config-json");
+	if (localStorage.config) {
+		CONFIG = JSON.parse(localStorage.config);
+		configJson.innerText = JSON.stringify(CONFIG, null, 2);
+	} else if (!localStorage.config) {
+		CONFIG = {
+			"normalization":true,
+			"charcoalization":true,
+			"pot_mode":"stew",
+			"theme":{
+				"background_color":"#f16689"
+			}
+			
+		}
+		localStorage.config = JSON.stringify(CONFIG);
+		configJson.innerText = JSON.stringify(CONFIG, null, 2);
+
+	};
+
+	if (CONFIG.normalization) {
+		await evenTemperatures();
+	};
+
+
 };
 
 onStartup();
+
