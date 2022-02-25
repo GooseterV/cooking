@@ -320,61 +320,81 @@ const INGREDIENT_IMAGES = {
 	"Scallop":"src/scallop.png",
 	"Scallion":"src/scallion.png",
 	"Trout":"src/trout.png",
-	"Salmon":"src/salmon.png"
+	"Salmon":"src/salmon.png",
+	"T-Bone Steak":"src/tbone_steak.png"
 
 };
 
 const CATGEGORIES = Object.keys(INGREDIENTS);
 const MEALS = [
-	{
+	new Meal({
 		"Name":"Burger and Fries",
 		"Ingredients":[
-			{
-				"Ingredient":"Potato",
+			new MealIngredient({
+				"Name":"Potato",
 				"Method":"Fried",
-				"Pieces":"20",
-				"Amount":"300"
-			},
-			{
-				"Ingredient":"Beef Patty",
+				"Pieces":20,
+				"Amount":300,
+				"CookPercent":100
+			}),
+			new MealIngredient({
+				"Name":"Beef Patty",
 				"Method":"Grilled",
-				"Pieces":"1",
-				"Amount":"235"
-			},
-			{
-				"Ingredient":"Tomato",
+				"Pieces":1,
+				"Amount":235,
+				"CookPercent":100
+			}),
+			new MealIngredient({
+				"Name":"Tomato",
 				"Method":"Slightly Grilled",
-				"Pieces":"1",
-				"Amount":"100"
-			},
-			{
-				"Ingredient":"Cheddar Cheese",
+				"Pieces":1,
+				"Amount":100,
+				"CookPercent":25
+			}),
+			new MealIngredient({
+				"Name":"Cheddar Cheese",
+				"Method":"Barely Grilled",
+				"Pieces":1,
+				"Amount":50,
+				"CookPercent":5
+			}),
+			new MealIngredient({
+				"Name":"Top Burger Bun",
 				"Method":"Raw",
-				"Pieces":"1",
-				"Amount":"50"
-			},
-			{
-				"Ingredient":"Top Burger Bun",
-				"Method":"Raw",
-				"Pieces":"1",
-				"Amount":"150"
-			},
-			{
+				"Pieces":1,
+				"Amount":150,
+				"CookPercent":0
+			}),
+			new MealIngredient({
 				"Ingredient":"Bottom Burger Bun",
 				"Method":"Raw",
-				"Pieces":"1",
-				"Amount":"150"
-			}
+				"Pieces":1,
+				"Amount":150,
+				"CookPercent":0
+			})
 		],
-		"Ingredient Names":[
-			"Tomato",
-			"Beef Patty",
-			"Top Burger Bun",
-			"Bottom Burger Bun",
-			"Cheddar Cheese",
-			"Potato"
-		]
-	},
+		"Price":5
+	}),
+	new Meal({
+		"Name":"Steak and Fries",
+		"Ingredients":[
+			new MealIngredient({
+				"Name":"Steak",
+				"Method":"Cooked",
+				"Pieces":1,
+				"Amount":300,
+				"CookPercent":100
+			}),
+			new MealIngredient({
+				"Name":"Potato",
+				"Method":"Fried",
+				"Pieces":15,
+				"Amount":275,
+				"CookPercent":100
+			}),
+		],
+		"Price":19
+	})
 ]
 let INGREDIENTS_ACTIVE = false;
 let ACTIVE_CATEGORIES = [];
@@ -388,6 +408,7 @@ let POT_OFF_INTERVAL;
 let MEAL_INGREDIENTS = [];
 let CONFIG_ON = false;
 let CONFIG;
+let RESTAURANT = new Restaurant();
 
 const sleep = (ms) => {return new Promise(resolve => setTimeout(resolve, ms))};
 
@@ -475,20 +496,15 @@ async function showIngredients() {
 };
 
 async function selectIngredient(ingredient) {
-	ACTIVE_INGREDIENT = {
-		"Name":ingredient,
-		"Method":"raw",
-		"Cook Percentage":0,
-		"Temp":67
-	};
-	alert(`Ingredient Selected: ${ACTIVE_INGREDIENT.Name}`);
+	ACTIVE_INGREDIENT = new Ingredient(67, ingredient, 0, "raw");
+	alert(`Ingredient Selected: ${ACTIVE_INGREDIENT.name}`);
 };
 
 async function handleIngredientClick(ingredient) {
-	if (ACTIVE_INGREDIENT !== null && ACTIVE_INGREDIENT.Name === ingredient) {
+	if (ACTIVE_INGREDIENT !== null && ACTIVE_INGREDIENT.name === ingredient) {
 		ACTIVE_INGREDIENT = null;
 		alert(`Ingredient Deselected: ${ingredient}`);
-	} else if (ACTIVE_INGREDIENT !== null && ingredient !== ACTIVE_INGREDIENT.Name){
+	} else if (ACTIVE_INGREDIENT !== null && ingredient !== ACTIVE_INGREDIENT.name){
 		selectIngredient(ingredient);
 	} else {
 		selectIngredient(ingredient);
@@ -500,36 +516,38 @@ async function addIngredientToPan(ingredient) {
 	const panDetails = document.getElementById("pan-details");
 	let temp = parseInt(panElement.getAttribute("data-temperature"));
 	ACTIVE_INGREDIENT = null;
-	if (Object.keys(INGREDIENT_IMAGES).includes(ingredient.Name) || INGREDIENTS.Liquids.includes(ingredient.Name)) {
-		if (ingredient.Name === "Egg") {
+	if (Object.keys(INGREDIENT_IMAGES).includes(ingredient.name) || INGREDIENTS.Liquids.includes(ingredient.name)) {
+		if (ingredient.name === "Egg") {
 			document.getElementById("pan-contents").src = INGREDIENT_IMAGES["Fried Egg"];
-		} else if (INGREDIENTS.Liquids.includes(ingredient.Name) ) {
-			if (Object.keys(INGREDIENT_IMAGES).includes(`${ingredient.Name} Liquid`)) {
-				document.getElementById("pan-contents").src = INGREDIENT_IMAGES[`${ingredient.Name} Liquid`];
+		} else if (INGREDIENTS.Liquids.includes(ingredient.name) ) {
+			if (Object.keys(INGREDIENT_IMAGES).includes(`${ingredient.name} Liquid`)) {
+				document.getElementById("pan-contents").src = INGREDIENT_IMAGES[`${ingredient.name} Liquid`];
 			} else {
 				alert("Liquid fluid image not yet added.");
 			}
 		} else {
-			document.getElementById("pan-contents").src = INGREDIENT_IMAGES[ingredient.Name];
+			document.getElementById("pan-contents").src = INGREDIENT_IMAGES[ingredient.name];
 		};
 		panDetails.innerHTML = `
 		${temp}° (Off) <img id="pan-toggle" alt="Pan Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		<br>
-		Full Pan (${ingredient.Name})
+		Full Pan (${ingredient.name})
 		`;
 	} else {
 		alert("Food image not yet added.");
 	};
 	
-	panElement.setAttribute("data-contents", JSON.stringify(ingredient));
+	panElement.setAttribute("data-contents", JSON.stringify(ingredient.asJson()));
 
 };
 
-async function addIngredientToPot(ingredient) {
+async function addIngredientToPot(ingred) {
 	const potElement = document.getElementById("pot-holder");
 	const potDetails = document.getElementById("pot-details");
+	const on = POT_ON ? "On":"Off";
 	let ingredients = potElement.getAttribute("data-contents");
 	let temp = parseInt(potElement.getAttribute("data-temperature"));
+	let ingredient = ingred.asJson();
 	if ((ingredients !== "null" || ingredients !== "[]") && ingredients !== "null" ) {
 		let ingr = JSON.parse(ingredients);	
 		ingr.push(ingredient);
@@ -546,7 +564,7 @@ async function addIngredientToPot(ingredient) {
 	
 	ACTIVE_INGREDIENT = null;
 	potDetails.innerHTML = `
-		${temp}° (Off) <img id="pot-toggle" src="src/toggle_pan_button.png" alt="Pan Toggle Button" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+		${temp}° (${on}) <img id="pot-toggle" src="src/toggle_pan_button.png" alt="Pan Toggle Button" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
 		<br>
 		Full Pot 
 	`;
@@ -559,7 +577,7 @@ async function handlePanClick(contents) {
 	const panDetails = document.getElementById("pan-details");
 	let temp = parseInt(panElement.getAttribute("data-temperature"));
 	if (ACTIVE_INGREDIENT === null && contents !== "null") {
-		ACTIVE_INGREDIENT = JSON.parse(contents);
+		ACTIVE_INGREDIENT = new Ingredient(null, null, null, null, null).fromJson(JSON.parse(contents));
 		panElement.setAttribute("data-contents", "null");
 		document.getElementById("pan-contents").src = "src/transparent.png";
 		turnOffPan();
@@ -578,15 +596,15 @@ async function handlePanClick(contents) {
 async function handlePotClick(contents) {
 	const potElement = document.getElementById("pot-holder");
 	const potDetails = document.getElementById("pot-details");
+	const on = POT_ON ? "On":"Off";
 	let temp = parseInt(potElement.getAttribute("data-temperature"));
 	let ic = JSON.parse(contents);
 	if (ACTIVE_INGREDIENT === null && contents !== "null") {
-		ACTIVE_INGREDIENT = ic[ic.length-1];
+		ACTIVE_INGREDIENT = new Ingredient(null, null, null, null, null).fromJson(ic[ic.length-1]);
 		ic.pop();
 		potElement.setAttribute("data-contents", JSON.stringify(ic));
-		turnOffPot();
 		potDetails.innerHTML = `
-		${temp}° (Off) <img id="pot-toggle" src="src/toggle_pan_button.png" alt="Pot Toggle Button" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+		${temp}° (${on}) <img id="pot-toggle" src="src/toggle_pan_button.png" alt="Pot Toggle Button" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
 		<br>
 		Empty Pot
 		`;
@@ -599,22 +617,23 @@ async function increasePotTemperature() {
 	const potDetails = document.getElementById("pot-details");
 	const potElement = document.getElementById("pot-holder");
 	const potContents = potElement.getAttribute("data-contents");
+	const on = POT_ON ? "On":"Off";
 	let temp = parseInt(potElement.getAttribute("data-temperature"));
 	potElement.setAttribute("data-temperature", String(temp+1))
 	if (potContents !== "null") {
 		if (temp > 500 && CONFIG.charcoalization) {
-			potElement.setAttribute("data-contents", JSON.stringify([{"Name":"Charcoal Stew", "Method":"Burnt", "Cook Percentage":100, "Temp":temp}]))
+			potElement.setAttribute("data-contents", JSON.stringify([{"name":"Charcoal Stew", "cookMethod":"Burnt", "cookPercent":100, "temp":temp}]))
 			potDetails.innerHTML = `
-			${temp+1}° (On) <img id="pot-toggle" alt="Pot Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+			${temp+1}° (${on}) <img id="pot-toggle" alt="Pot Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
 			<br>
 			Full Pot (Charcoal Stew)
 			`;
 		} else {
 			let pc = JSON.parse(potContents);
-			pc.forEach((p, i, a)=>{p["Cook Percentage"] += .25; p["Temp"] += 1;});
+			pc.forEach((p, i, a)=>{p.cookPercent += .25; p.temp += 1;});
 			potElement.setAttribute("data-contents", JSON.stringify(pc));
 			potDetails.innerHTML = `
-			${temp+1}° (On) <img id="pot-toggle" alt="Pot Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+			${temp+1}° (${on}) <img id="pot-toggle" alt="Pot Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
 			<br>
 			Full Pot
 			`;
@@ -658,17 +677,18 @@ async function decreasePotTemperature() {
 	const potDetails = document.getElementById("pot-details");
 	const potElement = document.getElementById("pot-holder");
 	const potContents = potElement.getAttribute("data-contents");
+	const on = POT_ON ? "On":"Off";
 	let temp = parseInt(potElement.getAttribute("data-temperature"));
 	potElement.setAttribute("data-temperature", String(temp-1))
 	if (potContents !== "null") {
 		potDetails.innerHTML = `
-		${temp-1}° (Off) <img id="pot-toggle" alt="Pot Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+		${temp-1}° (${on}) <img id="pot-toggle" alt="Pot Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
 		<br>
 		Full Pot
 		`;
 	} else if (potContents === "null") {
 		potDetails.innerHTML = `
-		${temp-1}° (Off) <img id="pot-toggle" alt="Pot Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+		${temp-1}° (${on}) <img id="pot-toggle" alt="Pot Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
 		<br>
 		Empty Pot
 		`;
@@ -717,7 +737,7 @@ async function increasePanTemperature() {
 	panElement.setAttribute("data-temperature", String(temp+1))
 	if (panContents !== "null") {
 		if (temp > 500 && CONFIG.charcoalization) {
-			panElement.setAttribute("data-contents", JSON.stringify({"Name":"Charcoal", "Method":"Burnt", "Cook Percentage":100, "Temp":temp}))
+			panElement.setAttribute("data-contents", JSON.stringify({"name":"Charcoal", "cookMethod":"Burnt", "cookPercent":100, "temp":temp}))
 			panContentsImage.src = "src/charcoal.png";
 			panContentsImage.style = `filter: brightness(${String(100-((temp-59)/4))}%);`;
 			panDetails.innerHTML = `
@@ -727,14 +747,14 @@ async function increasePanTemperature() {
 			`;
 		} else {
 			let pc = JSON.parse(panContents);
-			pc["Cook Percentage"] += .25;
-			pc["Temp"] += 1;
+			pc.cookPercent += .25;
+			pc.temp += 1;
 			panElement.setAttribute("data-contents", JSON.stringify(pc));
 			panContentsImage.style = `filter: brightness(${String(100-((temp-59)/4))}%);`;
 			panDetails.innerHTML = `
 			${temp+1}° (On) <img id="pan-toggle" alt="Pan Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 			<br>
-			Full Pan (${JSON.parse(panContents).Name})
+			Full Pan (${JSON.parse(panContents).name})
 			`;
 		};
 	} else if (panContents === "null") {
@@ -756,7 +776,7 @@ async function turnOnPan() {
 		panDetails.innerHTML = `
 		${temp}° (On) <img id="pan-toggle" alt="Pan Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		<br>
-		Full Pan (${JSON.parse(panContents).Name})
+		Full Pan (${JSON.parse(panContents).name})
 		`;
 	} else if (panContents === "null") {
 		panDetails.innerHTML = `
@@ -783,10 +803,10 @@ async function decreasePanTemperature() {
 		panDetails.innerHTML = `
 		${temp-1}° (Off) <img id="pan-toggle" alt="Pan Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		<br>
-		Full Pan (${JSON.parse(panContents).Name})
+		Full Pan (${JSON.parse(panContents).name})
 		`;
 	} else if (panContents === "null") {
-		panContentsImage.style = `filter: brightness(${String(100-((temp-59)/4))}%);`;
+		//panContentsImage.style = `filter: brightness(${String(100-((temp-59)/4))}%);`;
 		panDetails.innerHTML = `
 		${temp-1}° (Off) <img id="pan-toggle" alt="Pan Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		<br>
@@ -804,7 +824,7 @@ async function turnOffPan() {
 		panDetails.innerHTML = `
 		${temp}° (Off) <img id="pan-toggle" alt="Pan Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		<br>
-		Full Pan (${JSON.parse(panContents).Name})
+		Full Pan (${JSON.parse(panContents).name})
 		`;
 	} else if (panContents === "null") {
 		panDetails.innerHTML = `
@@ -829,28 +849,28 @@ async function handlePanToggle() {
 async function attemptMakeMeal(ingredients) {
 	let SELECTED_MEAL;
 	for (let meal of MEALS) {
-		if (meal["Ingredient Names"].every(i=> [].concat(ingredients.map(e => e.Name)).includes(i))) {
+		if (meal.ingrNames.every(i=> [].concat(ingredients.map(e => e.name)).includes(i))) {
 			SELECTED_MEAL = meal;
 		};
 	};
-	alert("Attempted to make meal: " + SELECTED_MEAL.Name)
+	alert("Attempted to make meal: " + SELECTED_MEAL.name)
 };
 
 async function addIngredientToMealHolder(ingredient) {
 	const mealTable = document.getElementById("meal-maker");
 	const mealImageHolder = document.getElementById("meal-contents-image-holder");
-	if (Object.keys(INGREDIENT_IMAGES).includes(ingredient.Name)) {
+	if (Object.keys(INGREDIENT_IMAGES).includes(ingredient.name)) {
 		let ingredientImage = document.createElement("img");
-		ingredientImage.src = INGREDIENT_IMAGES[ingredient.Name];
+		ingredientImage.src = INGREDIENT_IMAGES[ingredient.name];
 		ingredientImage.width = 27.5;
 		ingredientImage.height = 27.5;
-		ingredientImage.alt = `${ingredient.Name} Image`;
-		ingredientImage.style = `image-rendering: pixelated; filter: brightness(${100-parseInt(ingredient["Cook Percentage"])}%);`;
+		ingredientImage.alt = `${ingredient.name} Image`;
+		ingredientImage.style = `image-rendering: pixelated; filter: brightness(${100-parseInt(ingredient.cookPercent)}%);`;
 		
 		mealImageHolder.appendChild(ingredientImage);
 
-	} else if (!(Object.keys(INGREDIENT_IMAGES).includes(ingredient.Name))) {
-		alert("Ingredient image not yet added." + ` (${ingredient.Name})`);
+	} else if (!(Object.keys(INGREDIENT_IMAGES).includes(ingredient.name))) {
+		alert("Ingredient image not yet added." + ` (${ingredient.name})`);
 	};
 };
 
@@ -905,10 +925,10 @@ async function evenPotTemp() {
 
 async function evenActiveIngredientTemp() {
 	if (ACTIVE_INGREDIENT !== null) {
-		if (ACTIVE_INGREDIENT.Temp < 69) {
-			ACTIVE_INGREDIENT.Temp += 1;
-		} else if (ACTIVE_INGREDIENT.Temp > 73) {
-			ACTIVE_INGREDIENT.Temp -= 1;
+		if (ACTIVE_INGREDIENT.temp < 69) {
+			ACTIVE_INGREDIENT.temp += 1;
+		} else if (ACTIVE_INGREDIENT.temp > 73) {
+			ACTIVE_INGREDIENT.temp -= 1;
 		};
 	};
 };
@@ -919,10 +939,10 @@ async function evenTableContentsTemp() {
 	if ((tableContents !== "[]" || tableContents !== "null") && tableContents !== "null") {
 		let tblContents = JSON.parse(tableContents);
 		for (let ingredient of tblContents) {
-			if (ingredient.Temp < 69) {
-				ingredient.Temp += 1;
-			} else if (ingredient.Temp > 73) {
-				ingredient.Temp -= 1;
+			if (ingredient.temp < 69) {
+				ingredient.temp += 1;
+			} else if (ingredient.temp > 73) {
+				ingredient.temp -= 1;
 			};
 
 		};
@@ -954,7 +974,7 @@ async function toggleConfig() {
 async function updateConfig(newConfig) {
 	CONFIG = newConfig;
 	localStorage.config = JSON.stringify(CONFIG);
-	document.body.style = "background-color: " + CONFIG.background_color + ";";
+	document.body.style = "background:" + CONFIG.theme.background_color + ";";
 };
 
 
@@ -965,12 +985,12 @@ async function resetConfig() {
 		"charcoalization":true,
 		"pot_mode":"stew",
 		"theme":{
-			"background_color":"#f16689"
+			"background_color":"#ff4d74"
 		}
-		
-	}
+	};
 	localStorage.config = JSON.stringify(CONFIG);
 	configJson.innerText = JSON.stringify(CONFIG, null, 2);
+	updateConfig(CONFIG);
 
 };
 
@@ -979,19 +999,19 @@ const onStartup = async () => {
 	if (localStorage.config) {
 		CONFIG = JSON.parse(localStorage.config);
 		configJson.innerText = JSON.stringify(CONFIG, null, 2);
+		updateConfig(CONFIG);
 	} else if (!localStorage.config) {
 		CONFIG = {
 			"normalization":true,
 			"charcoalization":true,
 			"pot_mode":"stew",
 			"theme":{
-				"background_color":"#f16689"
+				"background_color":"#ff4d74"
 			}
-			
-		}
+		};
 		localStorage.config = JSON.stringify(CONFIG);
 		configJson.innerText = JSON.stringify(CONFIG, null, 2);
-
+		
 	};
 
 	if (CONFIG.normalization) {

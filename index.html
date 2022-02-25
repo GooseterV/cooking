@@ -7,9 +7,10 @@
 		<title>Cooking</title>
 		<link rel="icon" href="src/pan_with_egg.png">
 		<link rel="stylesheet" href="styles.css">
+
 		<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 	</head>
-	<body style="background-color: #f16689;">
+	<body style="background: #ff4d74;">
 		<div id="main"> 
 			<div class="row">
 				<img src="src/box.png" onclick="showIngredients()" id="ingredient-storage" width="114.67px" height="100px" style="image-rendering: pixelated;" alt="Box Image"/>
@@ -52,13 +53,15 @@
 		<div id="config-box" style="display:none;">
 			<div class="box-config">
 				<div class="material-icons" id="reset-config" onclick="resetConfig()" style="position:relative; left:45%; cursor:pointer;">&#xe863;</div>
-				<pre id="config-json" onchange="updateConfig(JSON.parse(this.value))" contenteditable>
+				<pre id="config-json" oninput="updateConfig(JSON.parse(this.innerText))" contenteditable>
 
 				</pre>
 			</div>
 		</div>
 
 		<img id="config-toggle" src="src/gear.png" width="100px" height="100px" style="position:absolute; cursor:pointer; top:80%; left:88%;" onclick="toggleConfig()"/>
+		<script src="classes.js"></script>
 		<script src="bundle.js"></script>
+	
 	</body>
 </html>
