@@ -395,7 +395,7 @@ const MEALS = [
 		],
 		"Price":19
 	})
-]
+];
 let INGREDIENTS_ACTIVE = false;
 let ACTIVE_CATEGORIES = [];
 let ACTIVE_INGREDIENT = null;
@@ -422,10 +422,10 @@ async function addFood(name, grams) {
 };
 
 async function addMeal(name, ingredients) {
-	const meal = {
-		"name":name,
-		"ingredients":ingredients
-	}
+	const meal = new Meal({
+		"Name":name,
+		"Ingredients":ingredients
+	});
 	MEALS.push(meal);
 
 };

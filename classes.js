@@ -87,7 +87,6 @@ class Restaurant {
 			upgrades:this.upgrades
 		};
 	};
-
 };
 
 
