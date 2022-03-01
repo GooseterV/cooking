@@ -184,8 +184,8 @@ const INGREDIENT_IMAGES = {
 	"Almond": "src/almond.png",
 	"Anchovy": "src/anchovy.png",
 	"Apple": "src/apple.png",
-	"Apple Butter": "src/apple_butter.png",
-	"Apple Butter Liquid": "src/apple_butter_liquid.png",
+	"Apple Butter": "src/appleButter.png",
+	"Apple Butter Liquid": "src/appleButterLiquid.png",
 	"Asparagus": "src/asparagus.png",
 	"Avocado": "src/avocado.png",
 	"Bacon": "src/bacon.png",
@@ -193,36 +193,41 @@ const INGREDIENT_IMAGES = {
 	"Basil": "src/basil.png",
 	"Bay": "src/bay.png",
 	"Beef Chuck": "src/beefChuck.png",
-	"Beef Patty": "src/beef_patty.png",
+	"Beef Patty": "src/beefPatty.png",
 	"Beetroot": "src/beetroot.png",
 	"Blackberry": "src/blackberry.png",
 	"Black Pepper": "src/blackPepper.png",
 	"Blueberry": "src/blueberry.png",
+	"Bottle": "src/bottle.png",
 	"Box": "src/box.png",
 	"Bread": "src/bread.png",
 	"Broccoli": "src/broccoli.png",
 	"Brussels Sprouts": "src/brusselsSprouts.png",
 	"Burger Bun": "src/burgerBun.png",
 	"Burger Patty": "src/burgerPatty.png",
+	"Burger And Fries": "src/burger_and_fries.png",
 	"Butter": "src/butter.png",
 	"Button Mushroom": "src/buttonMushroom.png",
 	"Cabbage": "src/cabbage.png",
 	"Cantaloupe": "src/cantaloupe.png",
 	"Carrot": "src/carrot.png",
 	"Cashew": "src/cashew.png",
+	"Challah Bread": "src/challahBread.png",
 	"Charcoal": "src/charcoal.png",
 	"Cheddar": "src/cheddar.png",
 	"Cherry": "src/cherry.png",
 	"Chicken Breast": "src/chickenBreast.png",
 	"Chicken Leg": "src/chickenLeg.png",
 	"Chicken Wing": "src/chickenWing.png",
-	"Chili Pepper": "src/chili_pepper.png",
+	"Chicken Wings And Sweet Potatos": "src/chicken_wings_and_sweet_potatos.png",
+	"Chili Pepper": "src/chiliPepper.png",
 	"Chives": "src/chives.png",
 	"Cilantro": "src/cilantro.png",
 	"Cinnamon Stick": "src/cinnamonStick.png",
 	"Cocoa": "src/cocoa.png",
 	"Coconut": "src/coconut.png",
 	"Cod": "src/cod.png",
+	"Cog": "src/cog.png",
 	"Cooking Pot": "src/cooking_pot.png",
 	"Cooking Pot Bubbles": "src/cooking_pot_bubbles.png",
 	"Cooking Pot Bubbles 1": "src/cooking_pot_bubbles_1.png",
@@ -231,25 +236,31 @@ const INGREDIENT_IMAGES = {
 	"Cucumber": "src/cucumber.png",
 	"Dill": "src/dill.png",
 	"Dollar": "src/dollar.png",
-	"Duck Breast": "src/duck_breast.png",
+	"Duck Breast": "src/duckBreast.png",
 	"Durian": "src/durian.png",
 	"Egg": "src/egg.png",
 	"Eggplant": "src/eggplant.png",
 	"Empty Pan": "src/empty_pan.png",
+	"Empty Plate Large": "src/empty_plate_large.png",
 	"English Muffin": "src/englishMuffin.png",
 	"Feta": "src/feta.png",
 	"Fig": "src/fig.png",
-	"Fried Egg": "src/fried_egg.png",
+	"Flooring": "src/flooring.png",
+	"Fried Egg": "src/friedEgg.png",
 	"Fusilli": "src/fusilli.png",
 	"Garlic": "src/garlic.png",
+	"Gear": "src/gear.png",
+	"Gin": "src/gin.png",
 	"Ginger": "src/ginger.png",
+	"Gin Liquid": "src/ginLiquid.png",
+	"Glass": "src/glass.png",
 	"Glowing Blue Patty": "src/glowing_blue_patty.png",
 	"Goat Cheese": "src/goatCheese.png",
 	"Gorgonzola": "src/gorgonzola.png",
 	"Gouda": "src/gouda.png",
 	"Grandmas Ashes": "src/grandmas_ashes.png",
 	"Grape": "src/grape.png",
-	"Green Bell Pepper": "src/green_bell_pepper.png",
+	"Green Bell Pepper": "src/greenBellPepper.png",
 	"Guava": "src/guava.png",
 	"Habanero": "src/habanero.png",
 	"Ham": "src/ham.png",
@@ -258,6 +269,7 @@ const INGREDIENT_IMAGES = {
 	"Horseradish": "src/horseradish.png",
 	"Jalapeno": "src/jalapeno.png",
 	"Kiwi": "src/kiwi.png",
+	"Lake Whitefish": "src/lakeWhitefish.png",
 	"Lamb Chop": "src/lambChop.png",
 	"Lasagna": "src/lasagna.png",
 	"Lemon": "src/lemon.png",
@@ -265,13 +277,15 @@ const INGREDIENT_IMAGES = {
 	"Lobster": "src/lobster.png",
 	"Mango": "src/mango.png",
 	"Meal Button": "src/meal_button.png",
-	"Milk Jug": "src/milk_jug.png",
-	"Milk Liquid": "src/milk_liquid.png",
+	"Milk Jug": "src/milkJug.png",
+	"Milk":"src/milkJug.png",
+	"Milk Liquid": "src/milkLiquid.png",
 	"Mint Leaf": "src/mintLeaf.png",
 	"Mozzarella": "src/mozzarella.png",
 	"Onion": "src/onion.png",
 	"Orange": "src/orange.png",
-	"Orange Bell Pepper": "src/orange_bell_pepper.png",
+	"Orange Bell Pepper": "src/orangeBellPepper.png",
+	"Orange Juice Liquid": "src/orange_juice_liquid.png",
 	"Oregano": "src/oregano.png",
 	"Oyster": "src/oyster.png",
 	"Pancake": "src/pancake.png",
@@ -286,44 +300,57 @@ const INGREDIENT_IMAGES = {
 	"Pear": "src/pear.png",
 	"Pecan": "src/pecan.png",
 	"Penne": "src/penne.png",
+	"Pepper": "src/pepper.png",
+	"Pepper Shaker": "src/pepper_shaker.png",
 	"Persimmon": "src/persimmon.png",
 	"Pineapple": "src/pineapple.png",
-	"Red Bell Pepper": "src/red_bell_pepper.png",
-	"Root Beer": "src/root_beer.png",
-	"Root Beer Liquid": "src/root_beer_liquid.png",
-	"Skim Milk": "src/skim_milk.png",
+	"Placeholder Dish": "src/placeholder_dish.png",
+	"Red Bell Pepper": "src/redBellPepper.png",
+	"Red Liquid": "src/redLiquid.png",
+	"Red Wine": "src/redWine.png",
+	"Red Wine Liquid": "src/redWineLiquid.png",
+	"Root Beer": "src/rootBeer.png",
+	"Root Beer Liquid": "src/rootBeerLiquid.png",
+	"Rum": "src/rum.png",
+	"Rum Liquid": "src/rumLiquid.png",
+	"Salmon": "src/salmon.png",
+	"Salt": "src/salt.png",
+	"Salt Shaker": "src/salt_shaker.png",
+	"Scallion": "src/scallion.png",
+	"Scallop": "src/scallop.png",
+	"Skim Milk": "src/skimMilk.png",
 	"Steak": "src/steak.png",
-	"Swiss Cheese": "src/swiss_cheese.png",
+	"Steak And Fries": "src/steak_and_fries.png",
+	"Swiss Cheese": "src/swissCheese.png",
 	"Table": "src/table.png",
-	"Tbone Steak": "src/tbone_steak.png",
+	"Tbone Steak": "src/tboneSteak.png",
+	"Tiling": "src/tiling.png",
+	"Tiling 2": "src/tiling_2.png",
+	"Toast Peanutbutter And Jelly": "src/toast_peanutbutter_and_jelly.png",
 	"Toggle Pan Button": "src/toggle_pan_button.png",
 	"Tomato": "src/tomato.png",
 	"Transparent": "src/transparent.png",
+	"Trout": "src/trout.png",
 	"Turkey Patty": "src/turkey_patty.png",
+	"Unknown": "src/unknown.png",
 	"Vodka": "src/vodka.png",
-	"Water Liquid": "src/water_liquid.png",
-	"Whole Milk": "src/whole_milk.png",
-	"Yellow Bell Pepper": "src/yellow_bell_pepper.png",
+	"Vodka Liquid": "src/vodkaLiquid.png",
+	"Water": "src/water.png",
+	"Water Liquid": "src/waterLiquid.png",
+	"Watermelon": "src/watermelon.png",
+	"White Wine": "src/whiteWine.png",
+	"White Wine Liquid": "src/whiteWineLiquid.png",
+	"Whole Milk": "src/wholeMilk.png",
+	"Yellow Bell Pepper": "src/yellowBellPepper.png",
+	"Ziti": "src/ziti.png",
 	"Zucchini": "src/zucchini.png",
-	"Top Burger Bun": "src/burgerBun.png",
-	"Bottom Burger Bun":"src/burgerBun.png",
-	"Whole Milk Liquid":"src/milk_liquid.png",
-	"Skim Milk Liquid":"src/milk_liquid.png",
-	"Low-Fat Milk Liquid":"src/milk_liquid.png",
-	"Low-Fat Milk":"src/milk_jug.png",
-	"Water":"src/water.png",
-	"White Bread":"src/bread.png",
-	"Orange Juice Liquid":"src/orange_juice_liquid.png",
-	"Ziti":"src/ziti.png",
-	"Challah Bread":"src/challah_bread.png",
-	"Lake Whitefish":"src/lake_whitefish.png",
-	"Scallop":"src/scallop.png",
-	"Scallion":"src/scallion.png",
-	"Trout":"src/trout.png",
-	"Salmon":"src/salmon.png",
-	"T-Bone Steak":"src/tbone_steak.png"
-
-};
+	"Vinegar":"src/vinegar.png",
+	"Vinegar Liquid":"src/vinegarLiquid.png",
+	"Rice Wine":"src/riceWine.png",
+	"Rice Wine Liquid":"src/riceWineLiquid.png",
+	"Oil Liquid":"src/oilLiquid.png",
+	"Sunflower Oil":"src/sunflowerOil.png"
+}
 
 const CATGEGORIES = Object.keys(INGREDIENTS);
 const MEALS = [
@@ -523,8 +550,17 @@ async function addIngredientToPan(ingredient) {
 			if (Object.keys(INGREDIENT_IMAGES).includes(`${ingredient.name} Liquid`)) {
 				document.getElementById("pan-contents").src = INGREDIENT_IMAGES[`${ingredient.name} Liquid`];
 			} else {
-				alert("Liquid fluid image not yet added.");
-			}
+				//alert("Liquid fluid image not yet added.");
+				if (ingredient.name.includes("Milk")) {
+					document.getElementById("pan-contents").src = "src/milkLiquid.png";
+				} else if (ingredient.name.includes("Oil")){
+					document.getElementById("pan-contents").src = "src/oilLiquid.png";
+				} else {
+					document.getElementById("pan-contents").src = "src/unknown.png";
+				};
+				
+				
+			};
 		} else {
 			document.getElementById("pan-contents").src = INGREDIENT_IMAGES[ingredient.name];
 		};
@@ -534,7 +570,8 @@ async function addIngredientToPan(ingredient) {
 		Full Pan (${ingredient.name})
 		`;
 	} else {
-		alert("Food image not yet added.");
+		//alert("Food image not yet added.");
+		document.getElementById("pan-contents").src = "src/unknown.png";
 	};
 	
 	panElement.setAttribute("data-contents", JSON.stringify(ingredient.asJson()));
@@ -853,7 +890,8 @@ async function attemptMakeMeal(ingredients) {
 			SELECTED_MEAL = meal;
 		};
 	};
-	alert("Attempted to make meal: " + SELECTED_MEAL.name)
+	SELECTED_MEAL = SELECTED_MEAL === undefined || SELECTED_MEAL === null ? new Meal({"Name":prompt("Meal not recognized, would you like to name it?"), "Ingredients":ingredients, "Price":0}): SELECTED_MEAL; 
+	alert("Created meal " + SELECTED_MEAL.name);
 };
 
 async function addIngredientToMealHolder(ingredient) {
@@ -870,7 +908,15 @@ async function addIngredientToMealHolder(ingredient) {
 		mealImageHolder.appendChild(ingredientImage);
 
 	} else if (!(Object.keys(INGREDIENT_IMAGES).includes(ingredient.name))) {
-		alert("Ingredient image not yet added." + ` (${ingredient.name})`);
+		//alert("Ingredient image not yet added." + ` (${ingredient.name})`);
+		let ingredientImage = document.createElement("img");
+		ingredientImage.src = "src/unknown.png";
+		ingredientImage.width = 27.5;
+		ingredientImage.height = 27.5;
+		ingredientImage.alt = `${ingredient.name} Image`;
+		ingredientImage.style = `image-rendering: pixelated; filter: brightness(${100-parseInt(ingredient.cookPercent)}%);`;
+		
+		mealImageHolder.appendChild(ingredientImage);
 	};
 };
 
