@@ -14,8 +14,8 @@ class Foodable extends Purchaseable {
 
 
 class Ingredient extends Foodable {
-	constructor (price, name, cookPercent, cookMethod) {
-		super(price, name);
+	constructor (price, name, temp, cookPercent, cookMethod) {
+		super(price, name, temp);
 		this.cookPercent = cookPercent;
 		this.method = cookMethod;
 	};
@@ -40,7 +40,7 @@ class Ingredient extends Foodable {
 
 class Meal extends Foodable {
 	constructor ({Name, Ingredients, Price}) {
-		super(Price, Name);
+		super(Price, Name, null);
 		this.ingredients = Ingredients;
 		this.ingrNames = Ingredients.map(v => {return v.Name;});
 	};

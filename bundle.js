@@ -436,6 +436,14 @@ let MEAL_INGREDIENTS = [];
 let CONFIG_ON = false;
 let CONFIG;
 let RESTAURANT = new Restaurant();
+let SERVER_SOCKET;
+let SERVER_CONNECTION_ACTIVE = false;
+let SERVER_DATA = {
+	"potOn":false,
+	"panOn":false,
+	"panContents":"null",
+	"potContents":[],
+};
 
 const sleep = (ms) => {return new Promise(resolve => setTimeout(resolve, ms))};
 
@@ -523,7 +531,7 @@ async function showIngredients() {
 };
 
 async function selectIngredient(ingredient) {
-	ACTIVE_INGREDIENT = new Ingredient(67, ingredient, 0, "raw");
+	ACTIVE_INGREDIENT = new Ingredient(null, ingredient, 67, 0, "raw");
 	alert(`Ingredient Selected: ${ACTIVE_INGREDIENT.name}`);
 };
 
@@ -575,6 +583,7 @@ async function addIngredientToPan(ingredient) {
 	};
 	
 	panElement.setAttribute("data-contents", JSON.stringify(ingredient.asJson()));
+	SERVER_DATA.panContents = ingredient.asJson();
 
 };
 
@@ -600,24 +609,55 @@ async function addIngredientToPot(ingred) {
 	};
 	
 	ACTIVE_INGREDIENT = null;
+	SERVER_DATA.potContents = JSON.parse(potElement.getAttribute("data-contents"));
 	potDetails.innerHTML = `
 		${temp}° (${on}) <img id="pot-toggle" src="src/toggle_pan_button.png" alt="Pan Toggle Button" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
 		<br>
 		Full Pot 
 	`;
+	
 
+};
+/* 
+Used only for multiplayer webscoket servers, DO NOT use elsewhere.
+*/
+async function removePanContents() {
+	const panElement = document.getElementById("pan-holder");
+	const panDetails = document.getElementById("pan-details");
+	let temp = parseInt(panElement.getAttribute("data-temperature"));
+	const on = PAN_ON ? "On":"Off";
+	panElement.setAttribute("data-contents", "null");
+	document.getElementById("pan-contents").src = "src/transparent.png";
+	panDetails.innerHTML = `
+	${temp}° (${on}) <img id="pan-toggle" alt="Pan Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
+	<br>
+	Empty Pan
+	`;
+};
 
+async function removePotContents() {
+	const potElement = document.getElementById("pot-holder");
+	const potDetails = document.getElementById("pot-details");
+	const on = POT_ON ? "On":"Off";
+	let temp = parseInt(potElement.getAttribute("data-temperature"));
+	potElement.setAttribute("data-contents", "[]");
+	potDetails.innerHTML = `
+	${temp}° (${on}) <img id="pot-toggle" src="src/toggle_pan_button.png" alt="Pot Toggle Button" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
+	<br>
+	Empty Pot
+	`;
 };
 
 async function handlePanClick(contents) {
 	const panElement = document.getElementById("pan-holder");
 	const panDetails = document.getElementById("pan-details");
 	let temp = parseInt(panElement.getAttribute("data-temperature"));
-	if (ACTIVE_INGREDIENT === null && contents !== "null") {
+	if ((ACTIVE_INGREDIENT === null || ACTIVE_INGREDIENT === "null") && contents !== "null") {
 		ACTIVE_INGREDIENT = new Ingredient(null, null, null, null, null).fromJson(JSON.parse(contents));
 		panElement.setAttribute("data-contents", "null");
 		document.getElementById("pan-contents").src = "src/transparent.png";
 		turnOffPan();
+		SERVER_DATA.panContents = "null";
 		panDetails.innerHTML = `
 		${temp}° (Off) <img id="pan-toggle" alt="Pan Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
 		<br>
@@ -625,8 +665,12 @@ async function handlePanClick(contents) {
 		`;
 	} else if (contents === "null" && ACTIVE_INGREDIENT !== null) {
 		addIngredientToPan(ACTIVE_INGREDIENT);
+
 	} else if (contents !== "null" && ACTIVE_INGREDIENT !== null) {
 		alert("Pan is already full!");
+	};
+	if (SERVER_CONNECTION_ACTIVE) {
+		await updateServer();
 	};
 };
 
@@ -636,17 +680,24 @@ async function handlePotClick(contents) {
 	const on = POT_ON ? "On":"Off";
 	let temp = parseInt(potElement.getAttribute("data-temperature"));
 	let ic = JSON.parse(contents);
-	if (ACTIVE_INGREDIENT === null && contents !== "null") {
+	
+	if (ACTIVE_INGREDIENT === null && contents !== "null" && ic !== null && ic !== [] && contents !== "[]") {
 		ACTIVE_INGREDIENT = new Ingredient(null, null, null, null, null).fromJson(ic[ic.length-1]);
 		ic.pop();
+		
+		SERVER_DATA.potContents = ic;
 		potElement.setAttribute("data-contents", JSON.stringify(ic));
+		let empty = ic.length > 0 ? "Full" : "Empty";
 		potDetails.innerHTML = `
 		${temp}° (${on}) <img id="pot-toggle" src="src/toggle_pan_button.png" alt="Pot Toggle Button" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
 		<br>
-		Empty Pot
+		${empty} Pot
 		`;
 	} else if (ACTIVE_INGREDIENT !== null) {
 		addIngredientToPot(ACTIVE_INGREDIENT);
+	};
+	if (SERVER_CONNECTION_ACTIVE) {
+		await updateServer();
 	};
 };
 
@@ -658,7 +709,7 @@ async function increasePotTemperature() {
 	let temp = parseInt(potElement.getAttribute("data-temperature"));
 	potElement.setAttribute("data-temperature", String(temp+1))
 	if (potContents !== "null") {
-		if (temp > 500 && CONFIG.charcoalization) {
+		if (temp > 500 && CONFIG.charcoalization && potContents != "[]") {
 			potElement.setAttribute("data-contents", JSON.stringify([{"name":"Charcoal Stew", "cookMethod":"Burnt", "cookPercent":100, "temp":temp}]))
 			potDetails.innerHTML = `
 			${temp+1}° (${on}) <img id="pot-toggle" alt="Pot Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePotToggle()"/>
@@ -704,9 +755,14 @@ async function turnOnPot() {
 		`;
 	};
 	POT_ON = true;
+	SERVER_DATA.potOn = true;
 	cookingPot.src = "src/cooking_pot.gif";
-	clearInterval(POT_OFF_INTERVAL)
+	clearInterval(POT_OFF_INTERVAL);
+	info("Pot turned on.")
 	POT_ON_INTERVAL = setInterval(increasePotTemperature, 1000);
+	if (SERVER_CONNECTION_ACTIVE) {
+		await updateServer();
+	};
 
 };
 
@@ -752,9 +808,14 @@ async function turnOffPot() {
 		`;
 	};
 	POT_ON = false;
-	clearInterval(POT_ON_INTERVAL)
+	SERVER_DATA.potOn = false;
+	clearInterval(POT_ON_INTERVAL);
+	info("Pot turned off.")
 	cookingPot.src = "src/cooking_pot.png";
 	POT_OFF_INTERVAL = setInterval(()=>{}, 1250);
+	if (SERVER_CONNECTION_ACTIVE) {
+		await updateServer();
+	};
 };
 
 async function handlePotToggle() {
@@ -774,7 +835,7 @@ async function increasePanTemperature() {
 	panElement.setAttribute("data-temperature", String(temp+1))
 	if (panContents !== "null") {
 		if (temp > 500 && CONFIG.charcoalization) {
-			panElement.setAttribute("data-contents", JSON.stringify({"name":"Charcoal", "cookMethod":"Burnt", "cookPercent":100, "temp":temp}))
+			panElement.setAttribute("data-contents", JSON.stringify({"name":"Charcoal", "cookMethod":"Burnt", "cookPercent":100, "temp":temp, "price":null}))
 			panContentsImage.src = "src/charcoal.png";
 			panContentsImage.style = `filter: brightness(${String(100-((temp-59)/4))}%);`;
 			panDetails.innerHTML = `
@@ -823,9 +884,13 @@ async function turnOnPan() {
 		`;
 	};
 	PAN_ON = true;
-	clearInterval(PAN_OFF_INTERVAL)
+	SERVER_DATA.panOn = true;
+	clearInterval(PAN_OFF_INTERVAL);
+	info("Pan turned on.")
 	PAN_ON_INTERVAL = setInterval(increasePanTemperature, 975);
-
+	if (SERVER_CONNECTION_ACTIVE) {
+		await updateServer();
+	};
 };
 
 async function decreasePanTemperature() {
@@ -857,6 +922,7 @@ async function turnOffPan() {
 	const panElement = document.getElementById("pan-holder");
 	const panContents = panElement.getAttribute("data-contents");
 	let temp = parseInt(panElement.getAttribute("data-temperature"));
+	
 	if (panContents !== "null") {
 		panDetails.innerHTML = `
 		${temp}° (Off) <img id="pan-toggle" alt="Pan Toggle Button" src="src/toggle_pan_button.png" width="25px" height="25px" style="position:relative; top:5px; z-index: index 200;" onclick="handlePanToggle()"/>
@@ -871,8 +937,13 @@ async function turnOffPan() {
 		`;
 	};
 	PAN_ON = false;
+	SERVER_DATA.panOn = false;
 	clearInterval(PAN_ON_INTERVAL);
 	PAN_OFF_INTERVAL = setInterval(()=>{}, 1250);
+	info("Pan turned off.")
+	if (SERVER_CONNECTION_ACTIVE) {
+		await updateServer();
+	};
 };
 
 async function handlePanToggle() {
@@ -891,6 +962,7 @@ async function attemptMakeMeal(ingredients) {
 		};
 	};
 	SELECTED_MEAL = SELECTED_MEAL === undefined || SELECTED_MEAL === null ? new Meal({"Name":prompt("Meal not recognized, would you like to name it?"), "Ingredients":ingredients, "Price":0}): SELECTED_MEAL; 
+	info(`Attempted to create a meal, name is ${SELECTED_MEAL.name}`);
 	alert("Created meal " + SELECTED_MEAL.name);
 };
 
@@ -943,6 +1015,92 @@ async function handleMealMakeClick() {
 		};
 		
 	};
+};
+
+async function handleWsMessage(f, m) {
+	if (f === createServer) {
+		alert("Created server with pin: " + m.pin);
+		info(`WebSocket cooking server created with pin: ${m.pin}`);
+		await joinServer(m.pin);
+	} else if (f === joinServer) {
+		alert(m.msg);
+	};
+};
+
+async function createServer() {
+	const socket = new WebSocket("ws://localhost:4075/");
+	socket.onopen =  async () => {
+		socket.send(JSON.stringify({"action": "create_server"}));
+	};
+	socket.onmessage = async (evt) => {
+		const data = evt.data;
+		await handleWsMessage(createServer, JSON.parse(data));
+		//socket.close();
+	};
+	SERVER_SOCKET = socket;
+	return
+
+};
+
+async function joinServer(pin) {
+	const socket = SERVER_SOCKET === undefined ? new WebSocket("ws://localhost:4075/"): SERVER_SOCKET;
+	if (SERVER_SOCKET === undefined) socket.onopen = ()=>{socket.send(JSON.stringify({"action": "join_server", "pin":pin}));};
+	else if (SERVER_SOCKET !== undefined) socket.send(JSON.stringify({"action": "join_server", "pin":pin}));
+	socket.onmessage = async (evt) => {
+		const data = evt.data;
+		await handleWsMessage(joinServer, JSON.parse(data));
+		return
+	};
+
+	socket.onmessage = async (evt) => {
+		const data = JSON.parse(evt.data);
+		if (data.action === "received_update" ) await receiveServerUpdates(data);
+	};
+	SERVER_SOCKET = socket
+	SERVER_PIN = pin;
+	SERVER_CONNECTION_ACTIVE = true;
+	info(`WebSocket server joined on pin ${pin}`);
+	
+};
+
+async function receiveServerUpdates(parsed) {
+	// const potElement = document.getElementById("pot-holder");
+	// const panElement = document.getElementById("pan-holder");
+	const data = parsed.data;
+	const panContents = data.panContents;
+	const potContents = data.potContents;
+	const panon = data.panOn;
+	const poton = data.potOn;
+	
+	if (panon && (!PAN_ON)) {
+		await turnOnPan();
+	} else if (!(panon) && (PAN_ON === true) ) {
+		await turnOffPan();
+	};
+
+	if (poton && (POT_ON === false)) {
+		await turnOnPot();
+	} else if ((poton === false) && (POT_ON === true) ) {
+		await turnOffPot();
+	};
+
+	if (panContents !== "null") {
+		await addIngredientToPan(new Ingredient(null, null, null, null, null).fromJson(panContents))
+	} else if (panContents === "null") {
+		await removePanContents();
+	};
+
+	await removePotContents();
+	for (let ingr of potContents) await addIngredientToPot(new Ingredient(null, null, null, null, null).fromJson(ingr));
+	info("WebSocket update packet received and processed.");
+};
+
+async function updateServer() {
+	SERVER_SOCKET.send(JSON.stringify({
+		"action":"update_server",
+		"data":SERVER_DATA,
+		"pin":SERVER_PIN
+	}));
 };
 
 async function evenPanTemp() {
@@ -1004,7 +1162,7 @@ async function evenTemperatures() {
 };
 
 async function toggleConfig() {
-	const configBox = document.getElementById('config-box');
+	const configBox = document.getElementById("config-box");
 	const main = document.getElementById("main");
 	if (!CONFIG_ON) {
 		main.style = "display:none;"
