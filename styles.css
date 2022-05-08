@@ -1,11 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&family=Noto+Sans+JP&family=Red+Hat+Display:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100&family=Montserrat:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Montserrat:wght@300;500&display=swap');
 
 * {
 	font-family: "Montserrat" !important;
 }
 
-button, #ingredient-list span {
+/*
+@media screen and (max-width:720) {
+	html {
+		zoom:50%;
+	}
+}*/
+
+
+#ingredient-list span {
 	border-radius: 10px;
 	align-items: center;
 	justify-content: center;
@@ -15,144 +23,411 @@ button, #ingredient-list span {
 	text-decoration: none;
 	border: 0.67rem solid transparent;
 	text-decoration: none;
-	background-color:#50affdbe;
-	transition: .2s ease-in-out 0s;
-	font-weight:light;
+	background-color: #50affdbe;
+	transition: .7s ease-in-out 1s;
+	font-weight: light;
 }
 
 .ingredient-button {
-	background-color:transparent !important;
-	font-size:12px;
-	margin-bottom:-10px;
-	height:15px;
+	background-color: transparent !important;
+	font-size: 12px;
+	margin-bottom: -10px;
+	height: 15px;
 
 }
 
 .category {
-	font-size:15px !important;
-	font-weight:bold !important;
-	color:black !important;
+	font-size: 15px !important;
+	font-weight: bold !important;
+	color: black !important;
+	transition: 0.7s;
 }
 
+#pan-holder,
+#pot-holder {
+	float: right;
+	left: 85%;
+	position: absolute;
+	text-align: center;
+	width: 200px;
+}
+
+#pot-holder,
 #pan-holder {
-	float:right;
-	left:85%;
-	position:absolute;
-	margin-top:5px;
-	margin-bottom:1px;
-	text-align:center;
+	position: absolute;
 }
 
-#pan-details p {
-	text-align:center;
+
+#pan-details p,
+#pot-details p {
+	text-align: center;
 }
 
-#pan-holder img {
+/*
+#pan-details, #pot-details {
+	opacity:0;
+	transition: 0.3s;
+}
+
+#pan-images-holder:hover + #pan-details, #pan-details:hover {
+	opacity:1;
+	display:inline;
+	
+}*/
+
+/*
+#pan-holder img{
 	transform:rotate(45deg);
-}
-
+}*/
 
 #pan-contents {
-	position:relative;
-	top:-50px;
-	left:-43.5px;
+	position: relative;
+	transform: translate(-130%, -150%);
 }
 
 .rfl {
-	float:right;
-	left:75%;
+	float: right;
+	left: 75%;
 
 }
 
 
 
 #ingredient-list {
-	border-radius:7px;
-	position:relative;
-	border-radius:7px;
-	height:auto;
-	display:flex;
-	flex-direction:column;
+	border-radius: 7px;
+	position: relative;
+	border-radius: 7px;
+	height: auto;
+	display: flex;
+	flex-direction: column;
 	border-bottom: 0.67rem solid transparent;
+	transition: 0.7s;
 }
 
 .ingredient-columm {
-	display:flex;
-	flex-direction:column;
+	display: flex;
+	flex-direction: column;
 	border-bottom: 0.67rem solid transparent;
-	background-color:rgba(181, 241, 241, 0.637);
-	position:relative;
-	border-radius:7px;
-	height:auto;
+	background-color: rgba(181, 241, 241, 0.637);
+	position: relative;
+	border-radius: 7px;
+	height: auto;
 	border-bottom: 0.67rem solid transparent;
 }
 
+#cooking-pan {
+	transform: rotate(45deg);
+}
+
 .category-contents {
-	display:flex;
-	flex-direction:column;
+	display: flex;
+	flex-direction: column;
+	transition: 0.7s;
 }
 
 #pan-contents {
 	image-rendering: pixelated;
 }
 
+
 input, textarea {
-	color:black;
+	color: black;
 	border-radius: 10px;
 	font-weight: bold;
 	font-size: 15px;
 	text-decoration: none;
 	border: 0.67rem solid transparent;
-	background-color:#50affdbe;
-	outline:none;
+	background-color: #50affdbe;
+	outline: none;
 	vertical-align: top;
-	
+
 }
 
 
 
-#food-input, #ingredient-input {
-	margin-right:10px;
+#food-input,
+#ingredient-input {
+	margin-right: 10px;
 }
 
 ::placeholder {
-	color:black;
-	opacity:1;
+	color: black;
+	opacity: 1;
 }
 
 .row {
-	display:flex;
-	flex-direction:row;
+	display: flex;
+	flex-direction: row;
+	position: absolute;
+}
+
+body {
+	/*background: url("src/placeholder_dish.png") repeat;*/
+	image-rendering: pixelated;
+	background-size: 100px;
 }
 
 #ingredient-list span {
-	color:rgba(31, 30, 30, 0.685);
+	color: rgba(31, 30, 30, 0.685);
 }
 
-button:hover,  #ingredient-list span:hover{
-	cursor:pointer !important;
+button:hover,
+#ingredient-list span:hover {
+	cursor: pointer !important;
 }
 
 #ingredient-storage:hover {
-	cursor:pointer;
+	cursor: pointer;
 }
 
-#meal-maker {
-	position:absolute;
-	left:50%;
-	top:50%;
-	transform:translate(-50%, -50%);
+#meal-button-holder {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: row;
 }
 
 #meal-contents-image-holder {
-	display:flex;
-	flex-direction:row;
-	position:relative;
-	top:-69px;
-	left:10px;
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	top: -69px;
+	left: 10px;
+}
+
+#pot-toggle,
+#pan-toggle {
+	cursor: pointer;
+}
+
+#pan-details,
+#pot-details {
+	font-weight: bolder;
 }
 
 /*
 img {
 	image-rendering: pixelated;
 }*/
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+	scrollbar-width: auto;
+	scrollbar-color: #ff0f63;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+	width: 13px;
+}
+
+*::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: #ff0f63;
+	border-radius: 10px;
+}
+
+
+
+.box-config {
+	top:50%;
+	left:50%;
+	position:absolute;
+	transform:translate(-50%, -50%);
+	display:flex;
+	flex-direction:column;
+	overflow-x:hidden;
+}
+
+#config-json {
+	background-color:black;
+	color:white;
+	font-family:"JetBrains Mono" !important;
+	border-radius:7.5px;
+	border:transparent;
+	outline:none;
+	padding:3px;
+}
+
+
+.box-config span {
+	left:50%;
+	
+}
+
+.material-icons {
+	font-family: 'Material Icons' !important;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 30px;	/* Preferred icon size */
+	display: inline-block;
+	line-height: 1;
+	text-transform: none;
+	letter-spacing: normal;
+	word-wrap: normal;
+	white-space: nowrap;
+	direction: ltr;
+	
+	/* Support for all WebKit browsers. */
+	-webkit-font-smoothing: antialiased;
+	/* Support for Safari and Chrome. */
+	text-rendering: optimizeLegibility;
+	
+	/* Support for Firefox. */
+	-moz-osx-font-smoothing: grayscale;
+	
+	/* Support for IE. */
+	font-feature-settings: 'liga';
+}
+
+
+
+
+	
+
+
+.example-square {
+	flex-shrink: 0;
+	width: 300px;
+	margin-bottom: 30px;
+}
+
+.square .clr-field button,
+.circle .clr-field button {
+	width: 22px;
+	height: 22px;
+	left: 5px;
+	right: auto;
+	border-radius: 5px;
+}
+
+.square .clr-field input,
+.circle .clr-field input {
+	padding-left: 36px;
+}
+
+.circle .clr-field button {
+	border-radius: 50%;
+}
+
+.full .clr-field button {
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+}
+
+@media screen and (max-height:851px) {
+	html {
+		zoom:80%;
+	}
+}
+
+@media screen and (max-height:896px) {
+	html {
+		zoom:85%;
+	}
+
+	#config-toggle {
+		top:70% !important;
+		
+	}
+}
+
+@media screen and (max-height:915px) {
+	html {
+		zoom:85%;
+	}
+
+	#config-toggle {
+		top:70% !important;
+
+	}
+}
+
+@media screen and (max-width:880px) {
+	html {
+		zoom:70%;
+	}
+}
+
+@media screen and (max-width:440px) {
+	html {
+		zoom:35%;
+	}
+}
+
+
+@media screen and (max-width:220px) {
+	html {
+		zoom:calc(20%);
+	}
+
+	#config-toggle {
+		top:90% !important;
+	}
+}
+
+@media screen and (max-width:110px) {
+	html {
+		zoom:calc(35%/4);
+	}
+}
+
+@media screen and (max-width:55px) {
+	html {
+		zoom:calc(35%/8);
+	}
+}
+
+@media screen and (max-width:27.5px) {
+	html {
+		zoom:calc(35%/16);
+	}
+}
+
+@media screen and (max-width:13.75px) {
+	html {
+		zoom:calc(35%/32);
+	}
+}
+
+@media screen and (max-width:6.875px) {
+	html {
+		zoom:calc(35%/64);
+	}
+}
+/*
+@media screen and (max-height:851px) {
+	html {
+		zoom:80%;
+	}
+}
+
+@media screen and (max-height:896px) {
+	html {
+		zoom:85%;
+	}
+
+	#config-toggle {
+		top:67.5% !important;
+		
+	}
+}
+
+@media screen and (max-height:915px) {
+	html {
+		zoom:85%;
+	}
+
+	#config-toggle {
+		top:70% !important;
+
+	}
+}
+*/
